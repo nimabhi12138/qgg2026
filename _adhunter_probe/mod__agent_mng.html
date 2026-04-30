@@ -1,0 +1,405 @@
+﻿﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content ="IE=edge,chrome=1" />
+
+	<!-- Le styles -->
+	<link href="/web/Public/css/style.css" rel="stylesheet">
+	<link href="/web/Public/Third/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements  html5shiv.js已去除 -->
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="/web/Public/images/logo_32.png">
+	<script type="text/javascript" src="/web/Public/js/jquery.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="/web/Public/js/Util.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+
+	
+	<title>广告猎手后台维护系统 - 代理商信息</title>
+	<script>
+		var g_strModuleParam = "";
+		var g_AgentID = "6877";
+		var g_ParentAgentID = "0";
+		var g_AgentID_ToDisplay = "";
+		var g_IsPop = "0";
+		var g_LevelType = "0";
+	</script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/agent_mng.html.js"></script>
+	<script type="text/javascript" src="/web/Public/js/echarts.min.js"></script>
+</head>
+
+<body>
+ 	<div id="" class="easyui-panel" title="" style="width:100%;padding:10px;">
+   	<div style="width:100%;height:25px;padding:0px;">
+   		
+						
+					<!--
+   		<a id="" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-download'" onclick="DownloadClient();" style="float:right;margin-right:10px;">下载客户端</a>
+			-->			
+			<a id="" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="UpdateAgent();" style="float:right;margin-right:10px;">修改信息</a>
+   		<a id="" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-key'" onclick="ShowChangeSubPasswordDialog();" style="float:right;margin-right:10px;">修改技术员密码</a>
+   		<a id="" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-key'" onclick="ShowChangePasswordDialog();" style="float:right;margin-right:10px;">修改密码</a>  	
+			   		<div style="clear:both;"></div>
+  	</div>
+			
+  	<div id="divAgentList" style="width:100%;overflow-y:scroll;">
+	    <table id="tblAgentList" width="100%" class="table table-bordered table-hover">
+	      <thead>
+      		<tr>
+		 				<th onclick="GetAll_OrderBy(1);">Id<img id="spnOrderBy1" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        		        <th onclick="GetAll_OrderBy(2);">用户名<img id="spnOrderBy2" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		 						        <th onclick="GetAll_OrderBy(4);">网吧数<img id="spnOrderBy4" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(11);">昨日上线<img id="spnOrderBy11" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		 				<th onclick="GetAll_OrderBy(12);">上级代理<img id="spnOrderBy12" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>		 						        <th onclick="GetAll_OrderBy(5);">QQ号<img id="spnOrderBy5" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		 				<th class="switch_bank" onclick="GetAll_OrderBy(6);">银行卡号<img id="spnOrderBy6" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>		        <th onclick="GetAll_OrderBy(7);">收款姓名<img id="spnOrderBy7" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		 				<th class="switch_bank" onclick="">身份证号码</th>
+		        <th onclick="">开户行省份</th>
+		        <th onclick="">开户行城市</th>
+		        <th class="switch_bank" onclick="">开户行地址</th>
+		        <th class="switch_bank" onclick="">开户行名称</th>		        <th onclick="GetAll_OrderBy(8);">手机号码<img id="spnOrderBy13" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		 				<th onclick="GetAll_OrderBy(9);">技术员密码<img id="spnOrderBy14" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>					        <th onclick="GetAll_OrderBy(10);">注册时间<img id="spnOrderBy15" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+      		</tr>
+	      </thead>
+	      <tbody id="tbdAgentList">
+	    	</tbody>
+	    </table>
+	  </div>
+	    
+
+	  	<ul id="ulGetAllAgentPager" class="pagination pager-my-add">
+			  <li class="disabled"><a>&laquo;</a></li>
+			  <li class="disabled"><a>&raquo;</a></li>
+			  <li>
+			  	<a style="padding:5px;">
+			  		<input type="text" style="width:30px;height:19px;" onkeyup="if(event.keyCode==13)GetAllAgent($(this).val());"/>
+			  	</a>
+			  </li>
+			  <li><a>共0页0条数据 每页20条</a></li>
+			</ul>
+	</div>
+
+<div id="divEditAgentDialog" class="" title="新增信息" data-options="iconCls:'icon-edit'" style="width:600px;height:500px;padding:10px;display:none;">
+	<form id="frmEditAgent" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+     <!--
+     <tr>
+       <td style="width:25%;">上级代理商ID</td>
+       <td style="width:60%;">
+          	<input type="text" id="ParentAgentID" name="ParentAgentID" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     -->
+     <tr>
+       <td style="width:25%;">用户名</td>
+       <td style="width:60%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="agent_id" name="Id" value="" />
+          	<input type="text" id="UserName" name="UserName" disabled style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+		      <tr>
+       <td style="width:25%;">QQ号</td>
+       <td style="width:60%;">
+          	<input type="text" id="qq" name="qq" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:25%;">收款人姓名</td>
+       <td style="width:60%;">
+          	<input type="text" id="alipay_acct_name" name="alipay_acct_name" style="width:300px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:25%;">开户行名称</td>
+       <td style="width:60%;">
+          	<input type="text" id="kaihuhang_bank" name="kaihuhang_bank" style="width:300px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:25%;">银行帐号</td>
+       <td style="width:60%;">
+          	<input type="text" id="alipay_acct" name="alipay_acct" style="width:300px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:25%;">身份证号码</td>
+       <td style="width:60%;">
+          	<input type="text" id="identity_number" name="identity_number" style="width:300px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:25%;">开户行省市</td>
+       <td style="width:60%;">
+          	省份：<input type="text" id="kaihuhang_province" name="kaihuhang_province" style="width:100px;" />　　城市：<input type="text" id="kaihuhang_city" name="kaihuhang_city" style="width:100px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:25%;">开户行地址</td>
+       <td style="width:60%;">
+          	<input type="text" id="kaihuhang_addr" name="kaihuhang_addr" style="width:240px;" />　<a href="../img/bankaddress.png" target=_blank><font color=#FF0000>查看获取方法</font></a>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:25%;">手机号码</td>
+       <td style="width:60%;">
+          	<input type="text" id="phone" name="phone" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+		     <tr>
+		       <td style="width:40%;">短信验证码</td>
+		       <td style="width:320px;text-align:left;">
+		          	<input type="text" id="ChangeSubPassword__sms_verify_code" name="sms_verify_code" value="" style="width:238px;" />
+		          	<a id="" href="#" class="easyui-linkbutton" icon="" onclick="SendSmsVerifyCode();Enabled_ChangeInfo_AllFields();" style="">发送短信</a>
+		       </td>
+		       <td class="red_font" style="text-align:left;">*</td>
+		     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="btnSubmit_EditAgent" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditAgent();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<p class="red_font" style="margin-top:7px;">
+				【温馨提示】修改银行或手机号等关键信息前须发送验证码！
+	     	</p>
+       </td>
+       <td></td>
+     </tr>
+   </table>
+   </form>
+</div>
+
+<div id="divChangePasswordDialog" class="" title="修改密码" data-options="iconCls:'icon-edit'" style="width:600px;height:500px;padding:10px;display:none;">
+	<form id="frmChangePassword" method="POST">
+		<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+		<input type="hidden" id="ChangePassword_agent_ID" name="Id" value="" />
+		
+   <table class="table table-striped table-condensed" style="width:100%">
+     <tr>
+       <td style="width:25%;">密码</td>
+       <td style="width:60%;">
+          	<input type="password" id="UserPwd" name="UserPwd" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:25%;">确认密码</td>
+       <td style="width:60%;">
+          	<input type="password" id="UserPwd_Confirm" name="UserPwd_Confirm" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+		     <tr>
+		       <td style="width:40%;">短信验证码</td>
+		       <td style="width:320px;text-align:left;">
+		          	<input type="text" id="ChangeSubPassword__sms_verify_code" name="sms_verify_code" value="" style="width:238px;" />
+		          	<a id="" href="#" class="easyui-linkbutton" icon="" onclick="SendSmsVerifyCode();" style="">发送短信</a>
+		       </td>
+		       <td class="red_font" style="text-align:left;">*</td>
+		     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_ChangePassword();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+</div>
+<div id="divChangeSubPasswordDialog" class="" title="修改技术员密码" data-options="iconCls:'icon-edit'" style="width:600px;height:500px;padding:10px;display:none;">
+	<form id="frmChangeSubPassword" method="POST">
+		<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+		<input type="hidden" id="ChangeSubPassword_agent_ID" name="Id" value="" />
+		
+   <table class="table table-striped table-condensed" style="width:100%">
+     <tr>
+       <td style="width:25%;">技术员密码</td>
+       <td style="width:60%;">
+          	<input type="password" id="sub_password" name="sub_password" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:25%;">确认技术员密码</td>
+       <td style="width:60%;">
+          	<input type="password" id="sub_password_Confirm" name="sub_password_Confirm" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+		     <tr>
+		       <td style="width:40%;">短信验证码</td>
+		       <td style="width:320px;text-align:left;">
+		          	<input type="text" id="ChangeSubPassword__sms_verify_code" name="sms_verify_code" value="" style="width:238px;" />
+		          	<a id="" href="#" class="easyui-linkbutton" icon="" onclick="SendSmsVerifyCode();" style="">发送短信</a>
+		       </td>
+		       <td class="red_font" style="text-align:left;">*</td>
+		     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_ChangeSubPassword();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+</div>
+
+<div id="divDownloadDialog" class="" title="下载客户端" data-options="iconCls:'icon-edit'" style="width:400px;height:170px;padding:10px;display:none;">
+	<div id="spnDownloadClientLink" style="margin-top:21px;margin-left:60px;"><a id="ahDownloadClientLink" href="#" onclick="ClickHrefDownloadClient();">正在生成客户端，约需1分钟，请稍候......</a></div>
+	
+		     <div style="margin-left:60px;margin-top:20px;">
+		       	<input type="checkbox" id="agree_user_protocol" value="" style="margin-right:4px;line-height:14px;" />
+		       	<span style="line-height:14px;"><span>我同意<a href="#" onclick="ShowRegisterProtocolDialog();">《主机防护盾软件最终用户许可协议》</a></span>
+				<div class="red_font">注意：部分地区一卡通用户如有问题请联系QQ群技术</div>
+		     </div>
+</div>
+
+<div id="divRecentAgentClientCountChartDialog" class="" title="近一月客户端上线数曲线" data-options="iconCls:'icon-edit'" style="width:1000px;height:500px;padding:10px;display:none;">
+ 	<div id="divRecentAgentClientCountChart" style="width:100%;height:440px;">
+ 	</div>
+</div>
+
+<div id="divGetAgentClientDecreaseDialog" class="" title="近一月客户端流失情况" data-options="iconCls:'icon-edit'" style="width:750px;height:550px;padding:10px;display:none;">
+		最低流失百分比：<input type="text" id="iptAgentClientDecrease_Rate" value="12" style="height:20px;width:200px;margin-right:10px;" />
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="GetAgentClientDecrease();">确定</a>
+	    <table id="" width="100%" class="table table-bordered table-hover" style="width:100%;margin-top:5px;">
+	      <thead>
+      		<tr>
+		        <th onclick="">代理商名称</th>
+		        <th onclick="">流失前</th>
+		        <th onclick="">流失前日期</th>
+		        <th onclick="">流失后</th>
+		        <th onclick="">流失后日期</th>
+		        <th onclick="">流失率</th>
+      		</tr>
+	      </thead>
+	      <tbody id="tbdGetAgentClientDecrease">
+	    	</tbody>
+	    </table>
+</div>
+
+<div id="divRegisterProtocolDialog" class="easyui-dialog" title="《主机防护盾软件最终用户许可协议》" data-options="iconCls:'icon-edit'" style="width:950px;height:500px;padding:10px;display:none;">
+	<form id="" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+		     <tr>
+		       <td colspan="3" style="text-align:center;">
+		       	<textarea id="txaUserProtocol" style="width:100%;height:400px;">
+		       								主机防护盾软件最终用户许可协议
+====================================================================================
+
+浙江振创网络科技有限公司（以下称“振创公司”）请您务必仔细阅读和理解本主机防护盾软件最终用户许可协议（“本《协议》”）中规定的所有权利和限制。在安装时，您需要仔细阅读并决定接受或不接受本《协议》的条款。除非或直至您接受本《协议》的条款，否则本主机防护盾软件（以下称“软件”）“软件”不得安装在您的计算机上。
+
+您单击“同意”按钮，即表示您签名完全接受本《协议》的所有内容。
+
+作为参考，您现在就可以从本页起打印出本《协议》的文本，或者参阅本“软件”“帮助”文件中本《协议》的副本。 
+
+本《协议》是您与振创公司之间有关本“软件”的法律协议。本“软件”包括随附的计算机软件，并可能包括相关文档印刷材料。您一旦安装本“软件”，即表示您同意接受本《协议》各项条款的约束。如您不同意本《协议》中的条款，您则不可以安装或使用本“软件”。
+
+本“软件”知识产权归振创公司所有，“软件”的结构、组织、代码以及与软件相关的信息均属于振创公司的商业秘密和保密信息，受著作权法及国际著作权条约和其它知识产权法和条约的保护。本“软件”权利只许可使用，而不出售。
+
+一、振创公司将本“软件”在中华人民共和国（“中国”）大陆地区（除香港特别行政区、澳门特别行政区、台湾地区外的中国境内）的非专有的使用权授予您。 您可以： 
+1.  在一台计算机上安装、使用、显示、运行（“运行”）本“软件” 的一份副本。 
+2.  为了防止副本损坏而制作备份复制品。这些备份复制品不得通过任何方式提供给他人使用，并在您丧失该合法副本的所有权时，负责将备份复制品销毁。
+3.  为了把本“软件”用于实际的计算机应用环境或者改进其功能、性能而进行必要的修改；但是，除本《协议》另有约定外，未经振创公司许可，不得向任何第三方提供修改后的软件。
+ 
+二、您保证：
+1.  不在本《协议》之外，使用、复制、修改或转让本“软件”或其中的任一部分。
+2.  只在一台计算机上使用本“软件”；一份软件许可不得在不同的计算机上共同或同时使用。 
+3.  只在以下前提完全满足的情况下，将本“软件”用于多用户环境或网络系统上：
+本“软件”明文许可用于多用户环境或网络系统上；
+使用本“软件”的每一节点及终端都已购买使用许可。
+4.  不得对本“软件”进行反向工程、反向编译或反汇编；不得试图进行任何获得本“软件”原代码的访问或行为；不得对本“软件”或者本“软件”运行过程中释放到任何计算机终端内存中的数据、信息及该软件运行过程中客户端与服务器端的交互数据进行复制、更改、修改、挂接运行或创作任何衍生作品（包括但不限于以使用插件、外挂或非经授权的第三方工具/服务的形式接入本“软件”或与本“软件”相关的系统。”）。
+5.  不得发行、出租、信息网络传播、翻译本“软件”。
+6.  在本“软件”的所有副本上包含所有的版权标识。
+
+三、权利转让
+您可将您在本《协议》项下的所有权利作永久性一次转让，转让的条件是：
+1.  转让本“软件”（包括计算机软件，及可能附随的相关文档印刷材料）的所有部分；
+2.  如果本“软件”为升级版本，任何转让必须包括本“软件”的所有前版本；
+3.  您不得保留任何副本；
+4.  转让后您的许可权即自行终止；
+5.  受让人接受本《协议》的各项条款。  
+
+四、支持服务
+1.  如在本“软件”附随用户手册或其它材料中，振创公司明示将为您提供支持服务，则振创公司将依照该用户手册或其它材料中所述的各项政策和计划为您提供与本“软件”有关的支持服务（“支持服务”）。
+2. 提供给您作为支持服务的一部分的任何附加软件代码（如有）应被视为本“软件”的一部分，并须遵照本《协议》中的各项条款。
+3. 您明示同意，振创公司可将您提供给振创公司作为支持服务的一部分的技术信息（如有）用于商业用途，包括产品支持和开发。除了在为您提供支持服务时必须的情况外，振创公司在使用这些技术信息时不会以个人形式提及您。
+
+五、软件的使用及软件的替换、修改和升级
+1. 使用本“软件”功能及其对应服务前，您需要根据振创公司规定的注册程序注册账号并同意其相应的服务协议；本“软件”依赖于互联网络方可实现其功能，在未链接到互联网络情况下，不能实现本“软件”的功能。同时，为了向您提供更好的服务，振创公司将不断完善本“软件”的功能，在您链接到互联网的前提下，本“软件”默认自动进行更新以完善其功能。
+2. 振创公司保留在任何时候通过提前向您公告（包括但不限于客户端弹出页面、本“软件”官方网站、您提供的邮件地址）的方式为您提供本“软件”的替换版本或修改版本或升级版本以替换、修改或使本“软件”升级的权利和为这类替换、修改或升级收取费用的权利。该公告于发送或公布之日视为已送达收件人。因特殊原因（特殊原因包括但不限于：您提供的电子邮箱失效、您的邮箱设有邮件过滤、邮件拦截功能；等）导致您的电子邮件地址无法成功收到振创公司向您所提供的电子邮箱发送的公告，振创公司对此不承担任何责任。该公告所述内容将于公告载明的该内容的生效日期生效，如若公告未载明公告所述内容的生效日期，公告中所述内容将于公告发送或公布之日生效。
+3. 如您不接受本“软件”的替换版本或修改版本或升级版本，请您主动自行卸载本“软件”； 本“软件”新版本（指本“软件”的替换版本或修改版本或升级版本，视情况而定）发布后，您使用本“软件”新版本，则视为您完全接受本“软件”新版本；并且，本“软件”新版本发布后，振创公司不保证旧版本（指新版本发布之前的版本）的继续可用。振创公司保留因业务发展需要，单方面对本“软件”的部分功能效果进行改变或进行限制，您应承担此与此相关的风险。
+4.  振创公司提供给您的本“软件”的任何替换版本或修改软件代码或升级版本，将被视为本“软件”的一部分并且要受到本《协议》条款的制约（除非本《协议》被随附本“软件”的替换或修改版本或升级版本的另外一份《协议》取代）。
+5.  如果振创公司提供本“软件”的一个替换或修改版本或任何升级版本，则（a）您对本“软件”替换或修改版本或任何升级版本的使用条件是您接受本“软件”的这类替换或修改版本或升级版本以及任何随附的取代《协议》（如有），并且（b）您对本“软件”的所有先前版本的使用将被终止。
+
+
+六、权利的保留：
+1. 为维持软件替换、修改和升级费用，振创公司保留在提供给您的软件中添加任意形式的广告，或以其他方式从您使用软件中获得利益的权利。
+2. 未明示授予的一切权利均为振创公司所有。 
+
+七、本“软件”的著作权
+1.  您不得去掉本“软件”上的任何版权标识，并应在其所有复制品上依照其现有表述方式标注其版权属于振创公司。
+2.  本“软件”（包括但不限于本“软件”中所含的任何图像、照片、动画、录像、录音、音乐、文字和附加程序）、随附的印刷材料及本“软件”任何副本的著作权，均由振创公司拥有。
+3.  本“软件”及文档享有版权，并受国家版权法及国际协约条款的保护。
+4.  您不可以从本“软件”中去掉其版权声明；并保证为本“软件”的复制品（全部或部分）复制版权声明。
+5.  您同意不以任何形式复制本“软件”及程序、文档，并同意制止以任何形式非法复制本“软件”及文档。
+6.  您不可复制本“软件”随附的任何印刷材料。
+
+八、出口限制
+您同意不将本“软件”、其任何部分或任何属本“软件”的直接成果的任何程序或服务出口或转口给任何中国大陆外的任何国家或者地区。
+
+九、不允诺
+本《协议》所述明示担保，为担保的全部内容。在适用法律所允许的最大范围内，振创公司及其供应商提供的本“软件”和支持服务（如有）均为按现状及包含所有瑕疵状况下提供，不允诺其它不论是明示的、暗示的还是法定的任何保证和担保：包括但不限于本“软件”对特殊应用目的适销性或适应性，反应的精确性，结果的完整性，不含病毒及疏忽，针对本“软件”提供或不提供支持服务。
+
+十、责任有限：
+在适用法律所允许的最大范围内，振创公司或其供应商绝不就因使用或不能使用本“软件”所引起的或有关的无论是您或者任何第三方的任何间接的、意外的、直接的、特殊的、惩罚性的或其它任何损害（包括但不限于因人身伤害或财产损坏而造成的损害，因利润损失、数据损失、营业中断、计算机瘫痪或故障、商业信息的遗失而造成的损害，因未能履行包括诚信或相当注意在内的任何责任致使隐私泄露而造成的损害，因疏忽而造成的损害，或因任何金钱上的损失或任何其它损失而造成的损害）承担赔偿责任，即使振创公司或其任何供应商事先被告知该损害发生的可能性。即使补救措施未能达到预定目的，本损害赔偿排除条款将仍然有效。不论何种情况，振创公司及其供应商在本《协议》任何条款下所承担的全部责任，以及您可获得的赔偿（若由于违反售后担保，振创公司可按照本《协议》约定给您更换产品），以您购买本“软件”支付的款项为限。同时，振创公司对您或第三方提供的应用于或操作于本“软件”的内容或与该内容相关的其他内容而引起的任何索赔或损害不承担任何责任。
+
+十一、许可终止：
+1.  如您未遵守本《协议》的各项条款和条件，振创公司可终止本《协议》。终止本《协议》时，您必须立即销毁本“软件”的所有复制品，或者将其归还给振创公司。
+2.  通过向您提供本“软件”的任何替换或修改版本或升级版本的一份取代《协议》，并规定您使用这类替换、修改或升级版本的条件是您接受这类取代《协议》，振创公司可以终止本《协议》。
+
+十二、适用、管辖法律：
+本《协议》的订立、执行和解释及争议的解决均应适用中国大陆地区法律。
+如您与振创公司就本《协议》内容或其执行发生任何争议，双方应进行友好协商；协商不成时，任何一方均可向振创公司所在地有管辖权的人民法院提起诉讼。
+
+十三、特别提示：
+为了不断提高本“软件”和服务的质量，我们将有可能搜集您对本“软件”进行使用的信息，并不定期地予以反馈。
+我们不会搜集您的姓名、地址、联系方式等个人信息以及文件内容等涉及信息安全的信息。
+以上搜集的信息仅仅为了市场分析需要，以便我们今后能够为您提供更好的功能和服务，振创公司对此数据严格保密。
+本条所指搜集信息的范围以振创公司适时的技术水平为判断标准。振创公司将尽最大努力力求判断的准确性，但因受到现实技术水平等的限制，振创公司仅依照自有的判断能力进行甄别收集。您已明确知悉上述内容，且认可振创公司的操作，愿意承担因此而可能造成的损失。
+
+至此，您肯定已经详细阅读并已理解本《协议》，并同意严格遵守各条款和条件。
+
+
+		       	</textarea>
+		       </td>
+		     </tr>
+   </table>
+   </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,745 @@
+﻿﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content ="IE=edge,chrome=1" />
+
+	<!-- Le styles -->
+	<link href="/web/Public/css/style.css" rel="stylesheet">
+	<link href="/web/Public/Third/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements  html5shiv.js已去除 -->
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="/web/Public/images/logo_32.png">
+	<script type="text/javascript" src="/web/Public/js/jquery.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="/web/Public/js/Util.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+
+	
+	<title>广告猎手后台维护系统 - 规则管理</title>
+	<script>
+		var g_strModuleParam = "";
+		var g_AgentID = "6877";
+		var g_AgentID_ToDisplay = "";
+		var g_LevelType = "0";
+	</script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/rule_mng.html.js"></script>
+</head>
+
+<body>
+ 	<div id="" class="easyui-panel" title="" style="width:100%;padding:10px;">
+		<div style="width:100%;height:25px;padding:0px;">
+   		<span id="spnMsg" class="red_font" style="float:left;margin-left:20px;"></span>
+   		
+   		<div style="float:left;margin-left:20px;">
+   			规则名称：
+					<input type="text" id="search_keyword" name="search_keyword" class="" style="margin-left:10px;width:200px;margin-top:0px;height:22px;" />
+	   			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="func_Get();" style="margin-left:10px;">查找</a>    
+	   	</div>
+	   			
+			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="DeleteRule();" style="float:right;margin-right:10px;">删除</a>
+					   		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="UpdateRule(false);" style="float:right;margin-right:10px;">修改</a>
+					   		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="InsertRule(false);" style="float:right;margin-right:10px;">新增</a>
+   		   		
+			  	</div>  	
+			
+		
+  	<div id="divRuleList" style="width:100%;overflow-y:scroll;">
+	    <table id="tblRuleList" class="table table-bordered table-hover my-table-add" style="width:100%;">
+	      <thead>
+      		<tr>
+		        <th>代理商</th>
+		        <th>规则名称</th>
+		        <th style="width:3%;">启用</th>
+		        <th style="width:3%;">共享</th>
+								        <th style="width:40%;">规则内容</th>
+		        <th style="">使用次数</th>
+		        <th style="width:8%;">规则备份</th>
+		        <th style="width:18%;">备注</th>
+		        <th style="">最后修改时间</th>
+      		</tr>
+	      </thead>
+	      <tbody id="tbdRuleList">
+	      	<tr>
+		        	      		<td id="tdLoading" colspan="9" style="text-align:center;">正在加载，请稍候......</td>	      	</tr>
+	    	</tbody>
+	    </table>
+	  </div>
+  </div>
+  
+  
+<div id="divEditRuleDialog" class="" title="新增规则" data-options="iconCls:'icon-edit'" style="width:1080px;height:620px;padding:0;display:none;">
+	<form id="frmEditRule" method="POST">
+   <table id="tblEditRuleDialog" class="table table-striped table-condensed table-my-add" style="width:100%;margin-bottom:0;">
+     <tr>
+       <td style="width:10%;">规则名称</td>
+       <td style="width:89%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="AdRule_id" name="Id" value="" />
+       			<input type="hidden" id="EditRule__AgentID_ToDisplay" name="AgentID_ToDisplay" value="" />
+          	<input type="text" id="AdName" name="AdName" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:10%;">是否启用</td>
+       <td style="width:89%;">
+          	<input type="checkbox" id="EnableAd" name="EnableAd" value="1" checked style="" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:10%;">是否共享</td>
+       <td style="width:89%;">
+          	<input type="checkbox" id="IsShare" name="IsShare" value="1"  style="margin-right:120px;" />
+			<span class="red_font">请勿随意共享规则，违者作封号处理！</span>			
+						
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <!--
+			     	-->
+     <tr>
+       <td style="width:10%;" class="blue_font">规则内容</td>
+       <td id="tdEditRule_RuleContent" style="width:88%;">
+	       		<div id="divRuleItem_Adv" class="" style="width:100%;height:388px;overflow-y:auto;">
+		       		<table id="tblRuleItem_Adv" style="width:100%;height:388px;margin-bottom:0;">
+		       			<tr>
+					       <td style="width:10%;">文件规则</td>
+					       <td style="width:89%;">
+					          	<textarea id="EditAdRule__DIR" name="DIR" style="width:100%;height:63px;"></textarea>
+					       </td>
+					       <td class="red_font"></td>
+		       			</tr>
+		       			<tr>
+					       <td style="width:10%;">注册表规则</td>
+					       <td style="width:89%;">
+					          	<textarea id="EditAdRule__REG" name="REG" style="width:100%;height:63px;"></textarea>
+					       </td>
+					       <td class="red_font"></td>
+		       			</tr>
+		       			<tr>
+					       <td style="width:10%;">网络规则</td>
+					       <td style="width:89%;">
+					          	<textarea id="EditAdRule__IP" name="IP" style="width:100%;height:63px;"></textarea>
+					       </td>
+					       <td class="red_font"></td>
+		       			</tr>
+		       			<tr>
+					       <td style="width:10%;">窗口规则</td>
+					       <td style="width:89%;">
+					          	<textarea id="EditAdRule__CtrlWnd" name="CtrlWnd" style="width:100%;height:63px;"></textarea>
+					       </td>
+					       <td class="red_font"></td>
+		       			</tr>
+		       			<tr>
+					       <td style="width:10%;">线程注入规则</td>
+					       <td style="width:89%;">
+					          	<textarea id="EditAdRule__AntiThread" name="AntiThread" style="width:100%;height:63px;"></textarea>
+					       </td>
+					       <td class="red_font"></td>
+		       			</tr>
+		       			<tr>
+					       <td style="width:10%;">线程控制规则</td>
+					       <td style="width:89%;">
+					          	<textarea id="EditAdRule__ThreadControl" name="ThreadControl" style="width:100%;height:63px;"></textarea>
+					       </td>
+					       <td class="red_font"></td>
+		       			</tr>
+		       		</table>
+       			</div>
+	       			<div id="divRuleItemTab" class="" style="width:100%;height:388px;">
+	       				<!--
+	       				<div title="文件规则" style="">
+					       	<table id="RulePE_1_DirItem" class="table table-bordered table-condensed">
+					       		<tr>
+					       			<td style="font-weight:bold;text-align:center;">文件名</td>
+					       			<td style="font-weight:bold;text-align:center;">权限控制</td>
+					       			<td></td>
+					       		</tr>
+					       		<tr id="RulePE_1_DirItem_1">
+					       			<td style="width:330px;">
+					       				<input type="text" id="RulePE_1_DirItem_1_DirPath" style="width:100%;" />
+					       			</td>
+					       			<td>
+					       				<input type="checkbox" value="noRead" style="" />禁读
+					       				<input type="checkbox" value="noWrite" style="margin-left:5px;" />禁写
+										    <input type="checkbox" value="noExecute" style="margin-left:5px;" />禁执行
+					       				<input type="checkbox" value="noOpen" style="margin-left:5px;" />禁打开
+					       				<input type="checkbox" value="noCreate" style="margin-left:5px;" />禁创建
+					       				<input type="checkbox" value="noDelete" style="margin-left:5px;" />禁删除
+					       				<input type="hidden" id="RulePE1_DirItem_1_Control" value="" />
+					       			</td>
+					       			<td style="width:50px;">
+					       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RulePE_1_DirItem');" style="margin-right:3px;"/>
+					       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RulePE_1_DirItem_1');"/>
+					       			</td>
+					       		</tr>
+					       	</table>
+				       	</div>
+				       	-->
+	       				<div title="文件规则" style="">
+					       	<table id="RuleDIR" class="table table-bordered table-condensed" style="margin-bottom:0;">
+					       		<tr>
+										 	<!--<td style="font-weight:bold;text-align:center;">类型</td>-->
+					       			<td style="width:110px;font-weight:bold;text-align:center;vertical-align:middle;">父进程</td>
+					       			<td style="font-weight:bold;text-align:center;">权限</td>
+					       			<td></td>
+					       		</tr>
+					       		<tr id="RuleDIR_1">
+					       			<!--
+					       			<td>
+					       				<input type="radio" id="RuleDIRProcessPath_1_type__PE" name="RuleDIRProcessPath_1_type" style="" value="2" />文件
+					       				<input type="radio" id="RuleDIRProcessPath_1_type__MD5" name="RuleDIRProcessPath_1_type" style="" value="3" />MD5
+					       			</td>
+					       			-->
+					       			<td>
+					       				<input type="text" id="RuleDIRProcessPath_1" style="width:100px;" />
+					       			</td>
+					       			<td>
+										       	<table id="RuleDIR_1_DirItem" class="table table-bordered table-condensed" style="margin-bottom:0;">
+										       		<tr>
+										       			<td style="font-weight:bold;text-align:center;">子进程/文件/目录路径</td>
+										       			<td style="font-weight:bold;text-align:center;">权限控制</td>
+										       			<td></td>
+										       		</tr>
+										       		<tr id="RuleDIR_1_DirItem_1">
+										       			<td style="width:210px;">
+										       				<input type="text" id="RuleDIR_1_DirItem_1_DirPath" name="RuleDIR_1_DirItem_1_DirPath_Type" style="width:100%;" />
+										       			</td>
+										       			<td>
+										       				<input type="checkbox" value="noRead" style="" />禁读
+										       				<input type="checkbox" value="noWrite" style="margin-left:5px;" />禁写
+										       				<input type="checkbox" value="noExecute" style="margin-left:5px;" />禁执行
+										       				<input type="checkbox" value="noOpen" style="margin-left:5px;" />禁打开
+										       				<input type="checkbox" value="noCreate" style="margin-left:5px;" />禁创建
+										       				<input type="checkbox" value="noDelete" style="margin-left:5px;" />禁删除
+								       									<input type="checkbox" value="WhitePass" style="margin-left:5px;" />白名单
+										       				<p style="margin:0px;padding:0;"></p>
+										       				<span class="blue_font">范围：</span>
+										       				<input type="checkbox" value="LevelEnable_Self" style="margin-left:5px;" checked /><span class="blue_font">本进程</span>
+										       				<input type="checkbox" value="LevelEnable_Child" style="margin-left:5px;" /><span class="blue_font">子进程</span>
+										       				<input type="hidden" id="RuleDIR1_DirItem_1_Control" value="" />
+										       			</td>
+										       			<td style="width:50px;">
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleDIR_1_DirItem');" style="margin-right:3px;"/>
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleDIR_1_DirItem_1');"/>
+										       			</td>
+										       		</tr>
+										       	</table>
+					       			</td>
+					       			<td style="width:50px;">
+					       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleDIR');" style="margin-right:3px;"/>
+										    <img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleDIR_1');"/>
+					       			</td>
+					       		</tr>
+					       	</table>
+				       	</div>
+				       	<!--
+	       				<div title="MD5规则" style="">
+	       					<!--
+					       	<table id="RuleMD5" class="table table-bordered table-condensed">
+					       		<tr>
+					       			<td style="width:110px;font-weight:bold;text-align:center;vertical-align:middle;">进程MD5</td>
+					       			<td style="font-weight:bold;text-align:center;">权限</td>
+					       			<td></td>
+					       		</tr>
+					       		<tr id="RuleMD5_1">
+					       			<td>
+					       				<input type="text" id="RuleMD5ProcessPath_1" style="width:100px;" />
+					       			</td>
+					       			<td>
+					       			--_-___>
+										       	<table id="RuleMD5_1_DirItem" class="table table-bordered table-condensed">
+										       		<tr>
+										       			<td style="font-weight:bold;text-align:center;">进程MD5</td>
+										       			<td style="font-weight:bold;text-align:center;">权限控制</td>
+										       			<td></td>
+										       		</tr>
+										       		<tr id="RuleMD5_1_DirItem_1">
+										       			<td style="width:310px;">
+										       				<input type="text" id="RuleMD5_1_DirItem_1_DirPath" style="width:100%;" />
+										       			</td>
+										       			<td>
+										       				<input type="checkbox" value="noRead" style="" />禁读
+										       				<input type="checkbox" value="noWrite" style="margin-left:5px;" />禁写
+										       				<input type="checkbox" value="noExecute" style="margin-left:5px;" />禁执行
+										       				<input type="checkbox" value="noOpen" style="margin-left:5px;" />禁打开
+										       				<input type="checkbox" value="noCreate" style="margin-left:5px;" />禁创建
+										       				<input type="checkbox" value="noDelete" style="margin-left:5px;" />禁删除
+										       				<input type="hidden" id="RuleMD51_DirItem_1_Control" value="" />
+										       			</td>
+										       			<td style="width:50px;">
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleMD5_1_DirItem');" style="margin-right:3px;"/>
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleMD5_1_DirItem_1');"/>
+										       			</td>
+										       		</tr>
+										       	</table>
+										       	<!--
+					       			</td>
+					       			<td style="width:50px;">
+					       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleMD5');" style="margin-right:3px;"/>
+										    <img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleMD5_1');"/>
+					       			</td>
+					       		</tr>
+					       	</table>
+					       			--_-___>
+				       	</div>
+				       	-->
+	       				<div title="注册表规则" style="">
+					       	<table id="RuleREG" class="table table-bordered table-condensed" style="margin-bottom:0;">
+					       		<tr>
+					       			<!--
+										  <td style="font-weight:bold;text-align:center;">类型</td>
+										  -->
+					       			<td style="width:110px;font-weight:bold;text-align:center;vertical-align:middle;">进程名</td>
+					       			<td style="font-weight:bold;text-align:center;">权限</td>
+					       			<td></td>
+					       		</tr>
+					       		<tr id="RuleREG_1">
+					       			<!--
+					       			<td>
+					       				<input type="radio" id="RuleREGProcessPath_1_type__REG" name="RuleREGProcessPath_1_type" style="" value="1" checked />普通
+					       				<input type="radio" id="RuleREGProcessPath_1_type__REGMD5" name="RuleREGProcessPath_1_type" style="" value="2" />MD5
+					       			</td>
+					       			-->
+					       			<td>
+					       				<input type="text" id="RuleREGProcessPath_1" style="width:100px;" />
+					       			</td>
+					       			<td>
+										       	<table id="RuleREG_1_DirItem" class="table table-bordered table-condensed" style="margin-bottom:0;">
+										       		<tr>
+										       			<td style="font-weight:bold;text-align:center;">注册表路径</td>
+										       			<td style="font-weight:bold;text-align:center;">权限控制</td>
+										       			<td></td>
+										       		</tr>
+										       		<tr id="RuleREG_1_DirItem_1">
+										       			<td style="width:280px;">
+										       				<input type="text" id="RuleREG_1_DirItem_1_DirPath" style="width:100%;" />
+										       			</td>
+										       			<td>
+										       				<input type="checkbox" value="noRead" style="" />禁读
+										       				<input type="checkbox" value="noWrite" style="margin-left:5px;" />禁写
+										       				<input type="checkbox" value="noOpen" style="margin-left:5px;" />禁打开
+										       				<input type="checkbox" value="noCreate" style="margin-left:5px;" />禁创建
+										       				<input type="checkbox" value="noDelete" style="margin-left:5px;" />禁删除
+					       									<input type="checkbox" value="WhitePass" style="margin-left:5px;" />白名单
+										       				<p style="margin:0px;padding:0;"></p>
+										       				<span class="blue_font">范围：</span>
+										       				<input type="checkbox" value="LevelEnable_Self" style="margin-left:5px;" checked /><span class="blue_font">本进程</span>
+										       				<input type="checkbox" value="LevelEnable_Child" style="margin-left:5px;" /><span class="blue_font">子进程</span>
+										       				<input type="hidden" id="RuleREG1_DirItem_1_Control" value="" />
+										       			</td>
+										       			<td style="width:50px;">
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleREG_1_DirItem');" style="margin-right:3px;"/>
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleREG_1_DirItem_1');"/>
+										       			</td>
+										       		</tr>
+										       	</table>
+					       			</td>
+					       			<td style="width:50px;">
+					       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleREG');" style="margin-right:3px;"/>
+										    <img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleREG_1');"/>
+					       			</td>
+					       		</tr>
+					       	</table>
+				       	</div>
+				       	<!--
+	       				<div title="注册表MD5规则" style="">
+					       	<table id="RuleREGMD5" class="table table-bordered table-condensed">
+					       		<tr>
+					       			<td style="width:110px;font-weight:bold;text-align:center;vertical-align:middle;">进程MD5</td>
+					       			<td style="font-weight:bold;text-align:center;">权限</td>
+					       			<td></td>
+					       		</tr>
+					       		<tr id="RuleREGMD5_1">
+					       			<td>
+					       				<input type="text" id="RuleREGMD5ProcessPath_1" style="width:100px;" />
+					       			</td>
+					       			<td>
+										       	<table id="RuleREGMD5_1_DirItem" class="table table-bordered table-condensed">
+										       		<tr>
+										       			<td style="font-weight:bold;text-align:center;">注册表路径</td>
+										       			<td style="font-weight:bold;text-align:center;">权限控制</td>
+										       			<td></td>
+										       		</tr>
+										       		<tr id="RuleREGMD5_1_DirItem_1">
+										       			<td style="width:280px;">
+										       				<input type="text" id="RuleREGMD5_1_DirItem_1_DirPath" style="width:100%;" />
+										       			</td>
+										       			<td>
+										       				<input type="checkbox" value="noRead" style="" />禁读
+										       				<input type="checkbox" value="noWrite" style="margin-left:5px;" />禁写
+										       				<input type="checkbox" value="noOpen" style="margin-left:5px;" />禁打开
+										       				<input type="checkbox" value="noCreate" style="margin-left:5px;" />禁创建
+										       				<input type="checkbox" value="noDelete" style="margin-left:5px;" />禁删除
+										       				<input type="hidden" id="RuleREGMD51_DirItem_1_Control" value="" />
+										       			</td>
+										       			<td style="width:50px;">
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleREGMD5_1_DirItem');" style="margin-right:3px;"/>
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleREGMD5_1_DirItem_1');"/>
+										       			</td>
+										       		</tr>
+										       	</table>
+					       			</td>
+					       			<td style="width:50px;">
+					       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleREGMD5');" style="margin-right:3px;"/>
+										    <img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleREGMD5_1');"/>
+					       			</td>
+					       		</tr>
+					       	</table>
+				       	</div>
+				       	-->
+	       				<div title="网络规则" style="">
+					       	<table id="RuleIP" class="table table-bordered table-condensed" style="margin-bottom:0;">
+					       		<tr>
+					       			<td style="width:90px;font-weight:bold;text-align:center;vertical-align:middle;">进程路径</td>
+					       			<td style="width:30px;font-weight:bold;text-align:center;vertical-align:middle;">方向</td>
+					       			<td style="font-weight:bold;text-align:center;">拦截</td>
+					       			<td></td>
+					       		</tr>
+					       		<tr id="RuleIP_1">
+					       			<td>
+					       				<input type="text" id="RuleIPProcessPath_1" style="width:80px;" />
+					       			</td>
+					       			<td>
+					       				<select id="RuleIP_Direction_1" onchange="Change_RuleIP_Direction(this);"><option value="out">出</option><option value="in">进</option></select>
+					       			</td>
+					       			<td>
+										       	<table id="RuleIP_1_DirItem" class="table table-bordered table-condensed" style="margin-bottom:0;">
+										       		<tr>
+										       			<td style="font-weight:bold;text-align:center;">域名/IP</td>
+										       			<td style="font-weight:bold;text-align:center;">协议</td>
+										       			<td style="font-weight:bold;text-align:center;">拦截端口</td>
+										       			<!--
+										       			<td></td>
+										       			-->
+										       		</tr>
+										       		<tr id="RuleIP_1_DirItem_1">
+										       			<td>
+										       				<input type="text" id="RuleIP_1_DirItem_1_IP" style="width:200px;" />
+										       			</td>
+										       			<td style="width:200px;">
+										       				<input type="radio" id="RuleIP_1_DirItem_1_tcp" name="RuleIP_1_DirItem_1_PROTOCOL" value="tcp" style="" />tcp
+										       				<input type="radio" id="RuleIP_1_DirItem_1_udp" name="RuleIP_1_DirItem_1_PROTOCOL" value="udp" style="margin-left:3px;" />udp
+										       				<p style="margin:0px;padding:0;"></p>
+										       				<span class="blue_font">范围：</span>
+										       				<input type="checkbox" value="1" style="margin-left:5px;" checked /><span class="blue_font">本进程</span>
+										       				<input type="checkbox" value="2" style="margin-left:5px;" /><span class="blue_font">子进程</span>
+										       				<input type="hidden" id="RuleIP_1_DirItem_1_Control" value="" />
+										       			</td>
+										       			<td>
+										       				<input type="text" style="width:100%;" />
+										       			</td>
+										       			<td style="width:50px;">
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleIP_1_DirItem');" style="margin-right:3px;"/>
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleIP_1_DirItem_1');"/>
+										       			</td>
+										       		</tr>
+										       	</table>
+					       			</td>
+					       			<td style="width:50px;">
+					       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleIP');" style="margin-right:3px;"/>
+										    <img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleIP_1');"/>
+					       			</td>
+					       		</tr>
+					       	</table>
+				       	</div>
+	       				<div title="窗口规则" style="">
+					       	<table id="RuleWINDOW" class="table table-bordered table-condensed" style="margin-bottom:0;">
+					       		<tr>
+					       			<td style="font-weight:bold;text-align:center;">进程类型</td>
+					       			<td style="font-weight:bold;text-align:center;">延时</td>
+					       			<td style="width:100px;font-weight:bold;text-align:center;vertical-align:middle;">进程路径</td>
+					       			<td style="font-weight:bold;text-align:center;">拦截窗口</td>
+					       			<td>
+					       				<input type="hidden" id="RuleWINDOW_1_CheckProcessTimespan" value="2000" />
+					       				<input type="hidden" id="RuleWINDOW_1_CheckProcessTime" value="20000000" />
+					       				<input type="hidden" id="RuleWINDOW_1_CheckProcessStartDelay" value="3" />
+					       			</td>
+					       		</tr>
+					       		<tr id="RuleWINDOW_1">
+					       			<td style="width:125px;">
+					       				<input type="checkbox" id="RuleWINDOWProcessPath_1_type__SELF" name="RuleWINDOWProcessPath_1_type" style="" value="1" checked />本进程
+					       				<input type="checkbox" id="RuleWINDOWProcessPath_1_type__CHILD" name="RuleWINDOWProcessPath_1_type" style="" value="2" />子进程
+					       				<p style="margin:0;padding:0;"></p>
+					       				<input type="checkbox" id="RuleWINDOWProcessPath_1_type__NoInject" name="RuleWINDOWProcessPath_1_type" style="" value="4" />不注入
+					       				<input type="checkbox" id="RuleWINDOWProcessPath_1_type__MonitorWindow" name="RuleWINDOWProcessPath_1_type" style="" value="8" />后关闭
+					       				<input type="checkbox" id="RuleWINDOWProcessPath_1_type__MonitorWindow_OnlyHide" name="RuleWINDOWProcessPath_1_type" style="" value="16" />只隐藏
+					       				<input type="checkbox" id="RuleWINDOWProcessPath_1_type__MonitorWindow_SendQuit" name="RuleWINDOWProcessPath_1_type" style="" value="32" />加退出
+					       			</td>
+					       			<td>
+					       				<input type="text" id="RuleWINDOWProcessStartDelay_1" style="width:30px;" />秒
+					       			</td>
+					       			<td>
+					       				<input type="text" id="RuleWINDOWProcessPath_1" style="width:100px;" />
+					       			</td>
+					       			<td>
+										       	<table id="RuleWINDOW_1_DirItem" class="table table-bordered table-condensed" style="margin-bottom:0;">
+										       		<tr>
+										       			<td style="font-weight:bold;text-align:center;">窗口类名</td>
+										       			<td style="font-weight:bold;text-align:center;">窗口标题</td>
+										       			<td style="font-weight:bold;text-align:center;">宽度</td>
+										       			<td style="font-weight:bold;text-align:center;">高度</td>
+										       			<td style="font-weight:bold;text-align:center;">次数</td>
+										       			<td style="font-weight:bold;text-align:center;">睡眠</td>
+										       			<td></td>
+										       		</tr>
+										       		<tr id="RuleWINDOW_1_DirItem_1">
+										       			<td style="width:22%;">
+										       				<input type="text" id="RuleWINDOW_1_DirItem_1_DirPath" name="RuleWINDOW_1_DirItem_1_DirPath_Type" style="width:100%;" />
+										       			</td>
+										       			<td style="width:22%;">
+										       				<input type="text" id="RuleWINDOW_1_DirItem_1_DirPath" name="RuleWINDOW_1_DirItem_1_DirPath_Type" style="width:100%;" />
+										       			</td>
+										       			<td style="width:16%;">
+										       				<input type="text" id="RuleWINDOW_1_DirItem_1_DirPath" name="RuleWINDOW_1_DirItem_1_DirPath_Type" style="width:100%;" />
+										       			</td>
+										       			<td style="width:16%;">
+										       				<input type="text" id="RuleWINDOW_1_DirItem_1_DirPath" name="RuleWINDOW_1_DirItem_1_DirPath_Type" style="width:100%;" />
+										       			</td>
+										       			<td style="width:7%;">
+										       				<input type="text" id="RuleWINDOW_1_DirItem_1_DirPath" name="RuleWINDOW_1_DirItem_1_DirPath_Type" style="width:100%;" />
+										       			</td>
+										       			<td style="width:7%;">
+										       				<input type="text" id="RuleWINDOW_1_DirItem_1_DirPath" name="RuleWINDOW_1_DirItem_1_DirPath_Type" style="width:100%;" />
+										       			</td>
+										       			<td style="width:50px;">
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleWINDOW_1_DirItem');" style="margin-right:3px;"/>
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleWINDOW_1_DirItem_1');"/>
+										       			</td>
+										       		</tr>
+										       	</table>
+					       			</td>
+					       			<td style="width:50px;">
+					       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleWINDOW');" style="margin-right:3px;"/>
+										    <img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleWINDOW_1');"/>
+					       			</td>
+					       		</tr>
+					       	</table>
+				       	</div>
+	       				<div title="线程注入规则" style="">
+					       	<table id="RuleAntiThread" class="table table-bordered table-condensed" style="margin-bottom:0;">
+					       		<tr>
+					       			<td style="width:110px;font-weight:bold;text-align:center;vertical-align:middle;">进程名</td>
+					       			<td style="font-weight:bold;text-align:center;">权限</td>
+					       			<td></td>
+					       		</tr>
+					       		<tr id="RuleAntiThread_1">
+					       			<td>
+					       				<input type="text" id="RuleAntiThreadProcessPath_1" style="width:100px;" />
+					       			</td>
+					       			<td>
+										       	<table id="RuleAntiThread_1_DirItem" class="table table-bordered table-condensed" style="margin-bottom:0;">
+										       		<tr>
+										       			<td style="font-weight:bold;text-align:center;">目标进程</td>
+										       			<td style="font-weight:bold;text-align:center;">权限控制</td>
+										       			<td></td>
+										       		</tr>
+										       		<tr id="RuleAntiThread_1_DirItem_1">
+										       			<td style="width:210px;">
+										       				<input type="text" id="RuleAntiThread_1_DirItem_1_AntiThreadPath" name="RuleAntiThread_1_DirItem_1_AntiThreadPath_Type" style="width:100%;" />
+										       			</td>
+										       			<td>
+					       									<input type="checkbox" value="NoOpen" style="" />禁打开
+					       									<input type="checkbox" value="NoKill" style="margin-left:5px;" />禁关闭
+					       									<input type="checkbox" value="NoSuspend" style="margin-left:5px;" />禁挂起
+					       									<input type="checkbox" value="NoWMOP" style="margin-left:5px;" />禁读写
+					       									<input type="checkbox" value="noThread" style="margin-left:5px;" />禁注入
+								       									<input type="checkbox" value="KillChildProc" style="margin-left:5px;" />关子程
+															
+								       									<input type="checkbox" value="KillProc" style="margin-left:5px;" />关进程
+					       									<input type="checkbox" value="ProtectProc" style="margin-left:5px;" />保护
+					       									<input type="checkbox" value="WhitePass" style="margin-left:5px;" />白名单
+										       				<p style="margin:0px;padding:0;"></p>
+										       				<span class="blue_font">范围：</span>
+										       				<input type="checkbox" value="LevelEnable_Self" style="margin-left:5px;" checked /><span class="blue_font">本进程</span>
+										       				<input type="checkbox" value="LevelEnable_Child" style="margin-left:5px;" /><span class="blue_font">子进程</span>
+										       				<input type="hidden" id="RuleAntiThread1_AntiThreadItem_1_Control" value="" />
+										       			</td>
+										       			<td style="width:50px;">
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleAntiThread_1_DirItem');" style="margin-right:3px;"/>
+										       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleAntiThread_1_DirItem_1');"/>
+										       			</td>
+										       		</tr>
+										       	</table>
+					       			</td>
+					       			<td style="width:50px;">
+					       				<img src="/web/Public/js/jquery-easyui/themes/icons/edit_add.png" onclick="AddInputRow_DirItem('RuleAntiThread');" style="margin-right:3px;"/>
+										    <img src="/web/Public/js/jquery-easyui/themes/icons/edit_remove.png" onclick="DeleteInputRow_DirItem('RuleAntiThread_1');"/>
+					       			</td>
+					       		</tr>
+					       	</table>
+				       	</div>
+				      </div>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:10%;">备注</td>
+       <td style="width:89%;">
+          	<textarea id="Remark" name="Remark" style="width:300px;height:40px;"></textarea>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditRule();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+</div>
+
+
+		<div id="divShareRuleToSpecifiedAgentDialog" class="" title="共享规则到指定用户" data-options="iconCls:'icon-edit'" style="width:600px;height:300px;padding:10px;display:none;">
+			<form id="frmShareRuleToSpecifiedAgent" method="POST">
+		   <table class="table table-striped table-condensed" style="width:100%">
+		     <tr>
+		       <td style="width:25%;">复制到</td>
+		       <td style="width:60%;">
+		       			<input type="hidden" id="ShareRuleToSpecifiedAgent__AdRule_id" name="AdRule_id" />
+		          	<select id="ShareRuleToSpecifiedAgent__agent_id_share_to" name="agent_id_share_to" style="width:300px;"><select>
+		       </td>
+		       <td>*</td>
+		     </tr>
+		     <tr>
+		       <td style="width:10em">&nbsp;</td>
+		       <td>
+		       	<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_ShareRuleToSpecifiedAgent();">确定</a>
+		       </td>
+		       <td>&nbsp;</td>
+		     </tr>
+		   </table>
+		   </form>
+		</div>
+		
+		<div id="divShareRuleToMany_AgentDialog" class="" title="共享规则到大量用户 - 强制更新、分配到所有分组" data-options="iconCls:'icon-edit'" style="width:800px;height:400px;padding:10px;display:none;">
+			<form id="frmShareRuleToMany_Agent" method="POST">
+		   <table class="table table-striped table-condensed" style="width:100%">
+		     <tr>
+		       <td style="width:10%;">复制到</td>
+		       <td style="width:80%;">
+		       			<input type="hidden" id="ShareRuleToMany_Agent__AdRule_id" name="AdRule_id" />
+		          	<textarea id="ShareRuleToMany_Agent__agent_id_share_to__list" name="agent_id_share_to__list" style="width:650px;height:300px;"></textarea>
+		       </td>
+		       <td>*</td>
+		     </tr>
+		     <tr>
+		       <td style="width:10em">&nbsp;</td>
+		       <td>
+		       	<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_ShareRuleToMany_Agent();">确定</a>
+		       </td>
+		       <td>&nbsp;</td>
+		     </tr>
+		   </table>
+		   </form>
+		</div>
+		
+		<div id="divUpdateRuleDialog" class="" title="更新规则" data-options="iconCls:'icon-edit'" style="width:520px;height:230px;padding:10px;display:none;">
+			<form id="frmUpdateRule" method="POST">
+		   <table class="table table-striped table-condensed" style="width:100%;margin-top:10px;">
+		     <tr>
+		       <td colspan="3" style="padding-top:10px;">
+		       	<img src="../../web/Public/images/icons/tips_16.png" style="margin-right:3px;" />
+		       	更新前当前规则将被保存为还原点，请按需填入描述，<span class="blue_font">还原点最多可保存三个</span>
+		       	</td>
+		     </tr>
+		     <tr>
+		       <td style="width:25%;padding-top:20px;">规则还原点描述</td>
+		       <td style="width:60%;padding-top:20px;">
+		       			<input type="hidden" id="UpdateRule__AdRule_id" name="AdRule_id" />
+		          	<input type="text" id="UpdateRule__bk_desc" name="bk_desc" style="width:300px;" />
+		       </td>
+		       <td></td>
+		     </tr>
+		     <tr>
+		       <td style="width:10em">&nbsp;</td>
+		       <td style="width:60%;padding-top:20px;">
+		       	<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_UpdateRule();">确定</a>
+		       	<a href="#" class="easyui-linkbutton" icon="icon-clear" onclick="$('#divUpdateRuleDialog').dialog('close');">取消</a>
+		       </td>
+		       <td>&nbsp;</td>
+		     </tr>
+		   </table>
+		   </form>
+		</div>
+		
+		<div id="divCopyRuleDialog" class="" title="复制规则" data-options="iconCls:'icon-edit'" style="width:500px;height:200px;padding:10px;display:none;">
+			<form id="frmCopyRule" method="POST">
+		   <table class="table table-striped table-condensed" style="width:100%;margin-top:10px;">
+		     <tr>
+		       <td style="width:18%;padding-top:20px;">复制规则后</td>
+		       <td style="width:60%;padding-top:20px;">
+		       			<input type="radio" name="CopyRule_assign_rule" id="CopyRule_assign_rule__default_group" value="1" selected /> 分配到默认组
+		       			<input type="radio" name="CopyRule_assign_rule" id="CopyRule_assign_rule__all_group" value="2" style="margin-left:5px;" /> 分配到所有分组
+		       			<input type="radio" name="CopyRule_assign_rule" id="CopyRule_assign_rule__none_group" value="0" style="margin-left:5px;" /> 不分配
+		       </td>
+		       <td></td>
+		     </tr>
+		     <tr>
+		       <td style="width:10em">&nbsp;</td>
+		       <td style="width:60%;padding-top:20px;">
+		       	<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_CopyRule();">确定</a>
+		       	<a href="#" class="easyui-linkbutton" icon="icon-clear" onclick="$('#divCopyRuleDialog').dialog('close');">取消</a>
+		       </td>
+		       <td>&nbsp;</td>
+		     </tr>
+		   </table>
+		   </form>
+		</div>
+		
+		<div id="divDeleteShareRuleToMany_AgentDialog" class="" title="删除推送的共享规则" data-options="iconCls:'icon-edit'" style="width:800px;height:400px;padding:10px;display:none;">
+			<form id="frmShareRuleToMany_Agent" method="POST">
+		   <table class="table table-striped table-condensed" style="width:100%">
+		     <tr>
+		       <td style="width:10%;">删除共享规则</td>
+		       <td style="width:80%;">
+		       			<input type="hidden" id="DeleteShareRuleToMany_Agent__AdRule_id" name="AdRule_id" />
+		          	<textarea id="DeleteShareRuleToMany_Agent__agent_id_share_to__list" name="agent_id_share_to__list" style="width:650px;height:300px;"></textarea>
+		       </td>
+		       <td>*</td>
+		     </tr>
+		     <tr>
+		       <td style="width:10em">&nbsp;</td>
+		       <td>
+		       	<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_DeleteShareRuleToMany_Agent();">确定</a>
+		       </td>
+		       <td>&nbsp;</td>
+		     </tr>
+		   </table>
+		   </form>
+		</div>
+		
+		<div id="divUpdateAllCopyedFromThisRule_AgentDialog" class="" title="更新所有复制" data-options="iconCls:'icon-edit'" style="width:1000px;height:600px;padding:10px;display:none;">
+			<form id="frmUpdateAllCopyedFromThisRule_Agent" method="POST">
+		   <table class="table table-striped table-condensed" style="width:100%">
+		     <tr>
+		       <td style="width:10%;">更新所有复制</td>
+		       <td style="width:80%;">
+		       			<input type="hidden" id="UpdateAllCopyedFromThisRule_Agent__AdRule_id" name="AdRule_id" />
+		          	<textarea id="UpdateAllCopyedFromThisRule_Agent__agent_id_share_to__list" name="agent_id_share_to__list" style="width:850px;height:460px;"></textarea>
+		       </td>
+		       <td>*</td>
+		     </tr>
+		     <tr>
+		       <td style="width:10em">&nbsp;</td>
+		       <td>
+		       	<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_UpdateAllCopyedFromThisRule_Agent();">确定</a>
+		       </td>
+		       <td>&nbsp;</td>
+		     </tr>
+		   </table>
+		   </form>
+		</div>
+
+</body>
+</html>

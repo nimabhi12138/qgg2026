@@ -1,0 +1,100 @@
+﻿﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content ="IE=edge,chrome=1" />
+
+	<!-- Le styles -->
+	<link href="/web/Public/css/style.css" rel="stylesheet">
+	<link href="/web/Public/Third/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements  html5shiv.js已去除 -->
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="/web/Public/images/logo_32.png">
+	<script type="text/javascript" src="/web/Public/js/jquery.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="/web/Public/js/Util.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+
+	
+	<title>广告猎手后台维护系统 - 显示参数</title>
+	<script>
+		var g_strModuleParam = "";
+		var g_AgentID = "6877";
+		var g_AgentID_ToDisplay = "";
+	</script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/client_param_mng.html.js"></script>
+</head>
+
+<body>
+ 	<div id="" class="easyui-panel" title="" style="width:100%;padding:10px;">
+   	<div style="width:100%;height:25px;padding:0px;">
+   		<div style="clear:both;"></div>
+  	</div>
+  		<form id="frmClientParam" style="">
+		    <table id="tblClientParamList" class="table table-bordered table-hover" style="width:98%;">
+		      <tbody id="tbdClientParamList">
+		    	</tbody>
+		    </table>
+				<button type="button" class="btn btn-warning" style="margin:auto auto;width:100px;" onclick="Submit_EditClientParam();">
+					设置
+				</button>
+	   	</form>
+	   	
+	</div>
+  
+  
+<div id="divEditClientParamDialog" class="" title="新增客户端显示参数" data-options="iconCls:'icon-edit'" style="width:600px;height:500px;padding:10px;display:none;">
+	<form id="frmEditClientParam" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+     <tr>
+       <td style="width:25%;">客户端显示参数名</td>
+       <td style="width:60%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="client_param_id" name="Id" value="" />
+          	<input type="text" id="ClientParamID" name="ClientParamID" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:25%;">密码</td>
+       <td style="width:60%;">
+          	<input type="password" id="PassWD" name="PassWD" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:25%;">确认密码</td>
+       <td style="width:60%;">
+          	<input type="password" id="PassWD_Confirm" name="" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:25%;">客户端显示参数类型</td>
+       <td style="width:60%;">
+          	<select type="text" id="LevelType" name="LevelType" style="width:300px;">
+          		<option value="0">管理员</option>
+          		<option value="1">一级代理商</option>
+          		<option value="2">二级代理商</option>
+          	</select>
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+
+</body>
+</html>

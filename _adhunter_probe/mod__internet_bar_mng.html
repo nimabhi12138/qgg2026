@@ -1,0 +1,107 @@
+﻿﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content ="IE=edge,chrome=1" />
+
+	<!-- Le styles -->
+	<link href="/web/Public/css/style.css" rel="stylesheet">
+	<link href="/web/Public/Third/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements  html5shiv.js已去除 -->
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="/web/Public/images/logo_32.png">
+	<script type="text/javascript" src="/web/Public/js/jquery.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="/web/Public/js/Util.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+
+	
+	<title>广告猎手后台维护系统 - 网吧管理</title>
+	<script>
+		var g_strModuleParam = "";
+		var g_AgentID = "6877";
+		var g_AgentID_ToDisplay = "";
+	</script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/internet_bar_mng.html.js"></script>
+</head>
+
+<body>
+ 	<div id="" class="easyui-panel" title="" style="width:100%;padding:10px;">
+   	<div style="width:100%;height:25px;padding:0px;">
+			
+			<div id="divSearch" style="float:left;margin-left:30px;margin-top:0px;">
+				<select id="search_field" name="search_field" style="height:22px;">
+										<option value="PublicIP">外网IP</option>
+					<option value="InternetBarName">网吧名</option>
+				</select>
+				<input type="text" id="search_keyword" name="search_keyword" class="" style="margin-left:10px;width:200px;height:22px;" />
+   			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="Search();" style="margin-left:10px;">查找</a>
+			</div>
+			
+   		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="DeleteInternetBar();" style="float:right;margin-right:10px;">删除网吧</a>
+			
+			<span class="label label-warning" style="float:right;margin-right:30px;margin-top:9px;">温馨提示: 点击表头可排序显示</span>
+   		<div style="clear:both;"></div>
+  	</div>
+  	<div id="divInternetBarList" style="width:100%;overflow-y:scroll;">
+	    <table id="tblInternetBarList" width="100%" class="table table-bordered table-condensed table-hover table-my-add">
+	      <thead>
+      		<tr>
+		        <th onclick="GetAll_OrderBy(2);">代理商<img id="spnOrderBy2" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(12);">网吧名称<img id="spnOrderBy12" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(3);">外网IP<img id="spnOrderBy3" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(14);">分组<img id="spnOrderBy14" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(15);">客户端数<img id="spnOrderBy15" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(16);">近3天上线数<img id="spnOrderBy16" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(17);">今天上线数<img id="spnOrderBy17" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+      		</tr>
+	      </thead>
+	      <tbody id="tbdInternetBarList">
+	    	</tbody>
+	    </table>
+	 	</div>
+
+	  	<ul id="ulGetAllInternetBarPager" class="pagination pager-my-add">
+			  <li class="disabled"><a>&laquo;</a></li>
+			  <li class="disabled"><a>&raquo;</a></li>
+			  <li>
+			  	<a style="padding:5px;">
+			  		<input type="text" style="width:30px;height:19px;" onkeyup="if(event.keyCode==13)GetAllClient($(this).val());"/>
+			  	</a>
+			  </li>
+			  <li><a>共0页0条数据 每页20条</a></li>
+			</ul>
+    </div>
+  </div>
+  
+  
+<div id="divEditIp_InternetBarNameDialog" class="" title="设置IP所在的网吧名称" data-options="iconCls:'icon-edit'" style="width:500px;height:200px;padding:10px;display:none;">
+	<form id="frmEditIp_InternetBarName" method="POST">
+   <table class="table table-striped" style="width:100%">
+     <tr>
+       <td style="width:25%;">网吧名称</td>
+       <td style="width:60%;">
+          	<input type="hidden" id="EditIp_InternetBarName__PublicIP" name="PublicIP" value="" style="width:300px;" />
+          	<input type="text" id="InternetBarName" name="InternetBarName" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditIp_InternetBarName();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+</div>
+
+</body>
+</html>

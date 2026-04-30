@@ -1,0 +1,251 @@
+﻿﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content ="IE=edge,chrome=1" />
+
+	<!-- Le styles -->
+	<link href="/web/Public/css/style.css" rel="stylesheet">
+	<link href="/web/Public/Third/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements  html5shiv.js已去除 -->
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="/web/Public/images/logo_32.png">
+	<script type="text/javascript" src="/web/Public/js/jquery.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="/web/Public/js/Util.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+
+	
+	<title>广告猎手后台维护系统 - 模块管理</title>
+	<script>
+		var g_strModuleParam = "official";
+		var g_AgentID = "6877";
+		var g_AgentID_ToDisplay = "";
+	</script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/module_mng.html.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+</head>
+
+<body>
+ 	<div id="" class="easyui-panel" title="" style="width:100%;padding:10px;">
+   	<div style="width:100%;height:25px;padding:0px;">
+		   		
+	   	   					   		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-detail'" onclick="parent.LoadModuleFunction_Real('client_group_policy_mng','模块分配','liClientGroupModuleMng','');" style="float:right;margin-right:10px;">查看模块分配</a>   		
+   		<div style="clear:both;"></div>
+  	</div>
+  	<div id="divModuleList" style="width:100%;overflow-y:scroll;">
+	    <table id="tblModuleList" width="100%" class="table table-bordered table-hover">
+	      <thead>
+      		<tr>
+		        <th onclick="GetAll_OrderBy(1);">代理商<img id="spnOrderBy1" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+	        		        <th onclick="GetAll_OrderBy(3);">显示名称<img id="spnOrderBy3" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+	   	   			     						        <th>MD5</th>
+		        <th onclick="GetAll_OrderBy(5);">下载次数<img id="spnOrderBy5" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th>概率</th>
+		        <th>时段</th>
+     						        <th>备注</th>
+		        <th onclick="GetAll_OrderBy(6);">加入时间<img id="spnOrderBy6" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(7);">最后更新</th>
+     				<th>操作</th>      		</tr>
+	      </thead>
+	      <tbody id="tbdModuleList">
+	    </tbody>
+	    </table>
+	  </div>
+  </div>
+  
+  
+<div id="divEditModuleDialog" class="easyui-dialog" title="新增模块" data-options="iconCls:'icon-edit'" style="width:700px;height:500px;padding:10px;display:none;">
+	<form id="frmEditModule" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+     <!-- 20230110停用此逻辑
+     <tr>
+       <td style="width:20%;">所属代理商</td>
+       <td style="width:64%;">
+       			<input type="hidden" id="module_id" name="Id" value="" />
+          	<select id="EditModule__AgentID" name="AgentID" style="width:380px;">
+          		          	</select>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     -->
+     <tr>
+       <td style="width:20%;">模块名</td>
+       <td style="width:64%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="module_id" name="Id" value="" />
+       			<input type="hidden" id="EditModule__AgentID_ToDisplay" name="AgentID_ToDisplay" value="" />
+       			
+          	<input type="text" id="module_name" name="module_name" style="width:380px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+          <tr>
+       <td style="width:20%;">模块显示名称</td>
+       <td style="width:64%;">
+          	<input type="text" id="module_display_name" name="module_display_name" style="width:380px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+     	       <td style="width:20%;">模块文件网址</td>       <td style="width:64%;">
+          	<input type="text" id="module_dll_file_path" name="module_dll_file_path" style="width:380px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:20%;">文件MD5</td>
+       <td style="width:64%;">
+          	<input type="text" id="md5" name="md5" style="width:380px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+          <tr>
+       <td style="width:20%;">下载次数</td>
+       <td style="width:64%;">
+          	<input type="text" id="downloaded_count" name="downloaded_count" value="" style="width:380px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     
+     <tr>
+       <td style="width:20%;">运行概率</td>
+       <td style="width:64%;">
+          	<input type="text" id="run_possibility" name="run_possibility" style="width:380px;" value="1000" />
+       </td>
+       <td class="blue_font">概率：千分之几</td>
+     </tr>
+     <tr>
+       <td style="width:20%;">运行时段</td>
+       <td style="width:64%;">
+          	<input type="text" id="run_time_segment" name="run_time_segment" style="width:380px;" value="0-23" />
+          	<ul style="list-style:none;margin:0;padding:0;">
+          		<li style="float:left;width:32px;">0点</li>
+          		<li style="float:left;width:32px;">2点</li>
+          		<li style="float:left;width:32px;">4点</li>
+          		<li style="float:left;width:32px;">6点</li>
+          		<li style="float:left;width:32px;">8点</li>
+          		<li style="float:left;width:32px;">10点</li>
+          		<li style="float:left;width:32px;">12点</li>
+          		<li style="float:left;width:32px;">14点</li>
+          		<li style="float:left;width:32px;">16点</li>
+          		<li style="float:left;width:32px;">18点</li>
+          		<li style="float:left;width:32px;">20点</li>
+          		<li style="float:left;width:32px;">22点</li>
+          		<li style="clear:both;"></li>
+          	</ul>
+          	<ul id="run_time_segment_List" style="list-style:none;margin:0;padding:0;">
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__0" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__2" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__4" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__6" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__8" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__10" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__12" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__14" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__16" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__18" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__20" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="float:left;width:32px;"><input type="checkbox" id="run_time_segment__22" checked onclick="Click_run_time_segment();" /></li>
+          		<li style="clear:both;"></li>
+          	</ul>
+       </td>
+       <td class="red_font">每个选择点表示两小时</td>
+     </tr>
+          
+     <tr id="trSmsVerifyCode" style="display:no--ne;">
+		       <td style="width:20%;">短信验证码</td>
+		       <td style="width:56%;text-align:left;">
+		          	<input type="text" id="sms_verify_code" name="sms_verify_code" value="" style="width:317px;" />
+		          	<a id="" href="#" class="easyui-linkbutton" icon="" onclick="SendSmsVerifyCode();" style="">发送短信</a>
+		       </td>
+		       <td class="red_font" style="text-align:left;">*</td>
+		     </tr>     
+     <tr>
+       <td style="width:20%;">备注</td>
+       <td style="width:64%;">
+          	<input type="text" id="remark" name="remark" value="" style="width:380px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditModule();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+</div>
+
+		<div id="divAssignToAgentListDialog" class="easyui-dialog" title="分配 - 大量用户" data-options="iconCls:'icon-edit'" style="width:800px;height:400px;padding:10px;display:none;">
+			<form id="frmAssignToAgentList" method="POST">
+		   <table class="table table-striped table-condensed" style="width:100%">
+		     <tr>
+		       <td style="width:10%;"><p>用户列表</p><p>分号分隔</p></td>
+		       <td style="width:80%;">
+		       			<input type="hidden" id="AssignToAgentList__module_id" name="module_id" />
+		          	<textarea id="AssignToAgentList__agent_name_list" name="agent_name_list" style="width:650px;height:300px;"></textarea>
+		       </td>
+		       <td>*</td>
+		     </tr>
+		     <tr>
+		       <td style="width:10em">&nbsp;</td>
+		       <td>
+		       	<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_AssignToAgentList();">确定</a>
+		       </td>
+		       <td>&nbsp;</td>
+		     </tr>
+		   </table>
+		   </form>
+		</div>
+		
+		<div id="divUnassignToAgentListDialog" class="easyui-dialog" title="取消分配 - 大量用户" data-options="iconCls:'icon-edit'" style="width:800px;height:400px;padding:10px;display:none;">
+			<form id="frmUnassignToAgentList" method="POST">
+		   <table class="table table-striped table-condensed" style="width:100%">
+		     <tr>
+		       <td style="width:10%;"><p>用户列表</p><p>分号分隔</p></td>
+		       <td style="width:80%;">
+		       			<input type="hidden" id="UnassignToAgentList__module_id" name="module_id" />
+		          	<textarea id="UnassignToAgentList__agent_name_list" name="agent_name_list" style="width:650px;height:300px;"></textarea>
+		       </td>
+		       <td>*</td>
+		     </tr>
+		     <tr>
+		       <td style="width:10em">&nbsp;</td>
+		       <td>
+		       	<a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_UnassignToAgentList();">确定</a>
+		       </td>
+		       <td>&nbsp;</td>
+		     </tr>
+		   </table>
+		   </form>
+		</div>
+
+<div id="divHavntAssignModule_AgentList_Dialog" class="easyui-dialog" title="未分配模块代理商列表" data-options="iconCls:'icon-detail'" style="width:600px;height:500px;padding:10px;display:none;">
+	
+  	<div id="divHavntAssignModule_AgentList" style="width:100%;overflow-y:scroll;">
+		查询条件： <input type="text" id="module_item_list" name="module_item_list" style="width:415px;margin-right:12px;margin-bottom:5px;" /><a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="GetAllHavntAssignModule_AgentList_EditSubmit();">查询</a>
+	    <table id="tblHavntAssignModule_AgentList" width="100%" class="table table-bordered table-hover">
+	      <thead>
+      		<tr>
+		        <th onclick="">代理商ID<img id="spnOrderBy1" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="">代理商名<img id="spnOrderBy2" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="">终端上线数<img id="spnOrderBy3" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+      		</tr>
+	      </thead>
+	      <tbody id="tbdHavntAssignModule_AgentList">
+	    </tbody>
+	    </table>
+	  </div>
+</div>
+
+</body>
+</html>

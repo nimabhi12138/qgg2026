@@ -1,0 +1,25 @@
+user_mng	客户端管理	https://www.adhunter.cn/index.php/user_mng	
+agent_mng	基本信息	https://www.adhunter.cn/index.php/agent_mng	广告猎手后台维护系统 - 代理商信息
+agent_policy_mng__lmp	主页设置	https://www.adhunter.cn/index.php/agent_policy_mng__lmp	广告猎手后台维护系统 - 工资发放
+agent_policy_mng__blackwhite	黑白名单	https://www.adhunter.cn/index.php/agent_policy_mng__blackwhite	广告猎手后台维护系统 - 工资发放
+rule_mng	我的规则	https://www.adhunter.cn/index.php/rule_mng	广告猎手后台维护系统 - 规则管理
+rule_mng__rule_shared_depot	共享规则库	https://www.adhunter.cn/index.php/rule_mng__rule_shared_depot	广告猎手后台维护系统 - 规则管理
+client_group_ip_mng	分组规则管理	https://www.adhunter.cn/index.php/client_group_ip_mng	广告猎手后台维护系统 - 网吧分组IP分配
+agent_policy_mng	设置主页	https://www.adhunter.cn/index.php/agent_policy_mng	广告猎手后台维护系统 - 工资发放
+nf_statt	收益明细	https://www.adhunter.cn/index.php/nf_statt	广告猎手后台维护系统 - 收益明细
+nf_statt_chart	收益曲线	https://www.adhunter.cn/index.php/nf_statt_chart	广告猎手后台维护系统 - 收益明细
+agent_salary_mng	收益发放	https://www.adhunter.cn/index.php/agent_salary_mng	广告猎手后台维护系统 - 工资发放
+client_mng	客户端管理	https://www.adhunter.cn/index.php/client_mng	广告猎手后台维护系统 - 客户端管理
+client_software_mng	客户端软件	https://www.adhunter.cn/index.php/client_software_mng	广告猎手后台维护系统 - 客户端软件信息管理
+client_hardware_mng	客户端硬件	https://www.adhunter.cn/index.php/client_hardware_mng	广告猎手后台维护系统 - 客户端硬件信息管理
+client_area_statt	地区分布统计	https://www.adhunter.cn/index.php/client_area_statt	广告猎手后台维护系统 - 代理商地区统计
+internet_bar_mng	网吧管理[IP]	https://www.adhunter.cn/index.php/internet_bar_mng	广告猎手后台维护系统 - 网吧管理
+internet_bar_route_mac_mng	网吧管理[Mac]	https://www.adhunter.cn/index.php/internet_bar_route_mac_mng	广告猎手后台维护系统 - 网吧管理
+module_mng__official	增值业务	https://www.adhunter.cn/index.php/module_mng__official	广告猎手后台维护系统 - 模块管理
+module_mng	自定义模块	https://www.adhunter.cn/index.php/module_mng	广告猎手后台维护系统 - 模块管理
+client_group_policy_mng	模块分配	https://www.adhunter.cn/index.php/client_group_policy_mng	广告猎手后台维护系统 - 配置管理
+client_param_mng	显示参数	https://www.adhunter.cn/index.php/client_param_mng	广告猎手后台维护系统 - 显示参数
+client_temperature_mng	硬件信息	https://www.adhunter.cn/index.php/client_temperature_mng	广告猎手后台维护系统 - 客户端管理
+yjs_agent_process_mng	CPU/GPU检测	https://www.adhunter.cn/index.php/yjs_agent_process_mng	广告猎手后台维护系统
+ls_search_result	广告/增值检测	https://www.adhunter.cn/index.php/ls_search_result	广告猎手后台维护系统 - 广告/增值检测统计
+yjs_process_mng	盗号检测	https://www.adhunter.cn/index.php/yjs_process_mng	广告猎手后台维护系统 - 全局终端管理

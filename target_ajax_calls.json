@@ -1,0 +1,391 @@
+{
+  "agent_mng.js": [
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/get_all_agent\"",
+      "data_expr": "strQuery"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/delete_agent/agent_id/\" + g_strAgentId_Selected",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"agent_mng/\" + strOp",
+      "data_expr": "$(\"#frmEditAgent\").serialize()"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"agent_mng/change_password\"",
+      "data_expr": "$(\"#frmChangePassword\").serialize()"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"agent_mng/change_sub_password\"",
+      "data_expr": "$(\"#frmChangeSubPassword\").serialize()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/inc_download_client_count\"",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/generate_client\"",
+      "data_expr": "'type=' + String(g_nCheckGenerate_Type)"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/check_generate_client_progress\"",
+      "data_expr": "'type=' + String(g_nCheckGenerate_Type)"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"nf_statt/get_idle_nf_account/\"",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/get_recent_agent_client_count?AgentID_ToDisplay=\" + strAgentId",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/get_agent_client_decrease?AgentClientDecrease_Rate=\" + strAgentClientDecrease_Rate",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/switch_agent_feedback_module?agent_id=\"+AgentID+\"&enable=\" + String(nEnable) + \"&module_name=\" + strModuleName",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/switch_agent_is_banned?agent_id=\"+AgentID+\"&is_banned=\" + String(nIsBanned)",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_module_mng/assign_agent_module_single?agent_id=\"+String(AgentId)+\"&module_id=\" + String(ModuleId)",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_module_mng/unassign_agent_module_single__Simple?agent_id=\"+String(AgentId)+\"&module_id=\" + String(ModuleId)",
+      "data_expr": "\"\""
+    }
+  ],
+  "client_mng.js": [
+    {
+      "type": "GET",
+      "url_expr": "\"client_mng/get_all_client\"",
+      "data_expr": "strQuery"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_mng/delete_client/\"",
+      "data_expr": "\"client_id_list=\" + g_strClientId_SelectedList"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_mng/delete_client_3month_not_online/\"",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_mng/delete_bar_20client_5day/\"",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_mng/\" + strOp",
+      "data_expr": "$(\"#frmEditClient\").serialize()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"client_mng/get_recent_statt\"",
+      "data_expr": "strQuery"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"client_mng/get_ip_location/ip/\" + strIp",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_mng/set_ip_internet_bar_name\"",
+      "data_expr": "\"PublicIP=\" + strPublicIP + \"&InternetBarName=\"+$.trim($(sender).val())"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"client_upload/get_last_client_log_url/agent_name/\" + strAgentName + \"/mac/\" + strMac",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"debug_rule_mng/\" + strOp",
+      "data_expr": "$(\"#frmGenerateStaticRule\").serialize()"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_mng/\" + strOp",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_mng/get_recent_agent_client_count\"",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_remote_control/\" + strOp",
+      "data_expr": "\"AgentID=\"+strAgentId + \"&mac=\" + strMac"
+    }
+  ],
+  "module_mng.js": [
+    {
+      "type": "GET",
+      "url_expr": "\"module_mng/get_all_module\"",
+      "data_expr": "strQuery"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"module_mng/delete_module/module_id/\" + g_strModuleId_Selected",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"module_mng/\" + strOp",
+      "data_expr": "$(\"#frmEditModule\").serialize()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"module_mng/module_clear_md5/module_id/\" + g_strModuleId_Selected",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_module_mng/update_agent_module__single_wrapper/module_id/\" + strModuleId",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_module_mng/assign_to_all_agent/module_id/\" + g_strModuleId_Selected",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"agent_module_mng/unassign_to_all_agent/module_id/\" + g_strModuleId_Selected",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"agent_module_mng/assign_to_agent_list\"",
+      "data_expr": "\"module_id=\" + g_strModuleId_Selected + \"&agent_name_list=\" + $('#AssignToAgentList__agent_name_list').val()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"module_mng/get_module_assigned_agent_list\"",
+      "data_expr": "\"module_id=\" + g_strModuleId_Selected"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"agent_module_mng/unassign_to_agent_list\"",
+      "data_expr": "\"module_id=\" + g_strModuleId_Selected + \"&agent_name_list=\" + $('#UnassignToAgentList__agent_name_list').val()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"module_mng/get_havnt_assign_module_agent/module_item_list/\" + module_item_list",
+      "data_expr": "strQuery"
+    }
+  ],
+  "rule_mng.js": [
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/get_all_rule\"",
+      "data_expr": "strQuery"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/delete_rule/AdRule_id/\" + g_strRuleId_Selected",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"rule_mng/\" + strOp",
+      "data_expr": "strPostData"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/copy_rule/AdRule_id/\" + g_strRuleId_Selected + \"/assign_to/\" + String(assign_to)",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/update_shared_rule\"",
+      "data_expr": "$(\"#frmUpdateRule\").serialize()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/get_havenot_assigned_rule_count\"",
+      "data_expr": "strQuery"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/share_rule_to_specified_agent/AdRule_id/\" + g_strRuleId_Selected + \"/agent_id_share_to/\" + $('#ShareRuleToSpecifiedAgent__agent_id_share_to').val()",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"rule_mng/share_rule_to_many__Agent\"",
+      "data_expr": "\"AdRule_id=\" + g_strRuleId_Selected + \"&agent_id_share_to__list=\" + $('#ShareRuleToMany_Agent__agent_id_share_to__list').val()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/restore_rule/AdRule_id/\" + adrule_id",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/delete_rule/AdRule_id/\" + adrule_bk_id",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"rule_mng/share_rule_to_all__Agent\"",
+      "data_expr": "\"AdRule_id=\" + g_strRuleId_Selected"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/get_shared_rule_assigned_agent_list\"",
+      "data_expr": "\"AdRule_id=\" + g_strRuleId_Selected"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"rule_mng/delete_share_rule_to_many__agent\"",
+      "data_expr": "\"AdRule_id=\" + g_strRuleId_Selected + \"&agent_id_share_to__list=\" + $('#DeleteShareRuleToMany_Agent__agent_id_share_to__list').val()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/update_rule_field/AdRule_id/\" + String(adrule_id)+\"/f/EnableAd/v/\"+String(nEnableAd)",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/update_rule_field/AdRule_id/\" + String(adrule_id)+\"/f/IsShare/v/\"+String(nIsShare)",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/update_rule_field/AdRule_id/\" + String(adrule_id)+\"/f/is_hide/v/\"+String(nis_hide)",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/get_shared_rule_assigned_agent_2_list\"",
+      "data_expr": "\"AdRule_id=\" + g_strRuleId_Selected"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"rule_mng/update_all_copyed_from_this_rule/AdRule_id/\" + g_strRuleId_Selected",
+      "data_expr": "\"agent_id_share_to__list=\" + $('#UpdateAllCopyedFromThisRule_Agent__agent_id_share_to__list').val()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"rule_mng/update_all_copyed_from_this_rule/AdRule_id/\" + g_strRuleId_Selected",
+      "data_expr": "''"
+    }
+  ],
+  "client_group_ip_mng.js": [
+    {
+      "type": "GET",
+      "url_expr": "\"client_group_ip_mng/get_all_client_group_ip\"",
+      "data_expr": "strQuery"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_group_ip_mng/\" + strOp",
+      "data_expr": "$(\"#frmEditClientGroupIp\").serialize()"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_group_ip_mng/\" + strOp",
+      "data_expr": "$(\"#frmEditClientGroupAdRule\").serialize()"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"client_group_ip_mng/delete_client_group/client_group_id/\" + g_strClientGroupId_Selected",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_group_ip_mng/\" + strOp",
+      "data_expr": "$(\"#frmEditClientGroup\").serialize()"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_group_ip_mng/\" + strOp",
+      "data_expr": "$(\"#frmEditClientGroupBootBat\").serialize()"
+    }
+  ],
+  "client_group_policy_mng.js": [
+    {
+      "type": "GET",
+      "url_expr": "\"client_group_policy_mng/SetHdiAgentConfig_ToAgentModuleParam\"",
+      "data_expr": "''"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"client_group_policy_mng/get_all_client_group_policy\"",
+      "data_expr": "strQuery"
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"client_group_policy_mng/delete_client_group_module?client_group_id=\" + g_strClientGroupId_Selected",
+      "data_expr": "''"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_group_policy_mng/\" + strOp",
+      "data_expr": "$(\"#frmEditClientGroupModule\").serialize()"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"agent_module_mng/\" + strOp",
+      "data_expr": "$(\"#frmEditAgentModule\").serialize()"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_group_policy_mng/set_yy_icon_count\"",
+      "data_expr": "$(\"#frmEditModuleParam\").serialize()"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_group_policy_mng/set_exclude_route_mac_list\"",
+      "data_expr": "$(\"#frmEditExcludeRouteMacList\").serialize()"
+    },
+    {
+      "type": "POST",
+      "url_expr": "\"client_group_policy_mng/set_exclude_outer_ip_list\"",
+      "data_expr": "$(\"#frmEditExcludeOuterIpList\").serialize()"
+    }
+  ],
+  "main.html.js": [
+    {
+      "type": "GET",
+      "url_expr": "\"main/CheckSessionTimeout\"",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"server_log_mng/get_perf_data\"",
+      "data_expr": "\"\""
+    },
+    {
+      "type": "GET",
+      "url_expr": "\"client_group_ip_mng/ensure_default_client_group\"",
+      "data_expr": "\"\""
+    }
+  ]
+}

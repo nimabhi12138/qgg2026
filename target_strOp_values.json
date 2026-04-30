@@ -1,0 +1,39 @@
+{
+  "agent_mng.js": [
+    "change_password",
+    "change_sub_password",
+    "insert_agent",
+    "update_agent"
+  ],
+  "client_mng.js": [
+    "generate_static_rule",
+    "insert_client",
+    "insert_client_remote_control",
+    "restore_internet_bar_name",
+    "update_client"
+  ],
+  "module_mng.js": [
+    "insert_module",
+    "insert_rule",
+    "update_module"
+  ],
+  "rule_mng.js": [
+    "insert_rule",
+    "update_rule"
+  ],
+  "client_group_ip_mng.js": [
+    "insert_client_group",
+    "insert_client_group_adrule",
+    "insert_client_group_ip",
+    "update_client_group",
+    "update_client_group_adrule",
+    "update_client_group_boot_bat",
+    "update_client_group_ip"
+  ],
+  "client_group_policy_mng.js": [
+    "insert_agent_module",
+    "insert_client_group_module",
+    "update_agent_module",
+    "update_client_group_module"
+  ]
+}

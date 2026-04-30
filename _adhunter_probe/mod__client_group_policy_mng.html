@@ -1,0 +1,266 @@
+﻿﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content ="IE=edge,chrome=1" />
+
+	<!-- Le styles -->
+	<link href="/web/Public/css/style.css" rel="stylesheet">
+	<link href="/web/Public/Third/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements  html5shiv.js已去除 -->
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="/web/Public/images/logo_32.png">
+	<script type="text/javascript" src="/web/Public/js/jquery.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="/web/Public/js/Util.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+
+	
+	<title>广告猎手后台维护系统 - 配置管理</title>
+	<script>
+		var g_strModuleParam = "";
+		var g_AgentID = "6877";
+		var g_AgentID_ToDisplay = "";
+		var g_LevelType = "0";
+	</script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/client_group_policy_mng.html.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+</head>
+
+<body>
+ 	<div id="" class="easyui-panel" title="" style="width:100%;padding:10px;">
+   	<div style="width:100%;height:25px;padding:0px;">
+   		<!--
+   		<a id="btnAdd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="DeleteClientGroupModule();" style="float:right;margin-right:10px;">删除</a>
+   		-->
+   		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="UpdateClientGroupModule();" style="float:right;margin-right:10px;">新增/修改分组模块</a>
+   		
+   		<!--
+   		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="InsertClientGroupModule();" style="float:right;margin-right:10px;">新增分组模块</a>
+   		-->
+   		<a id="btnEditAgentModule" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="UpdateAgentModule();" style="float:right;margin-right:10px;">新增/修改全局模块</a>
+   		<!--
+   		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="InsertAgentModule();" style="float:right;margin-right:10px;">新增全局模块</a>
+   		-->
+   		
+   		<div class="red_font" style="float:left;">无需运行模块的网吧请在排除外网IP和排除路由MAC中选填1处即可，优先填写排除路由MAC（即路由内网口MAC），如一个网吧对应多个路由需填写多个MAC，MAC格式为000C29112233</div>
+   		<div style="clear:both;"></div>
+  	</div>
+  	<div id="divAgentModuleList" style="width:100%;overflow-y:scroll;">
+	    <table id="tblAgentModuleList" width="100%" class="table table-bordered table-hover">
+	      <thead>
+      		<tr>
+		        <th>代理商</th>
+		        <th class="blue_font">全局模块</th>
+		        <th class="blue_font">全局模块参数</th>
+		        <th class="blue_font" style="word-break:break-all;width:30%;">全局排除路由器MAC</th>
+		        <th class="blue_font" style="word-break:break-all;width:30%;">全局排除外网IP</th>
+		        <th>分组名称</th>
+		        <th>分组模块</th>
+      		</tr>
+	      </thead>
+	      <tbody id="tbdAgentModuleList">
+	    </tbody>
+	    </table>
+    </div>
+    </div>
+  </div>
+  
+  
+<div id="divEditClientGroupModuleDialog" class="easyui-dialog" title="新增客户端分组模块配置" data-options="iconCls:'icon-edit'" style="width:600px;height:500px;padding:10px;display:none;">
+	<form id="frmEditClientGroupModule" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+     <tr>
+       <td style="width:14%;">代理商</td>
+       <td style="width:82%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="EditClientGroupModule__module_id_list" name="module_id_list" value="" />
+          	<select id="EditClientGroupModule__AgentID" name="" style="width:300px;" onchange="g_strClientGroupId_Selected = 0;Changed_AgentID();"></select>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:14%;">分组名称</td>
+       <td id="" style="width:82%;">
+          	<select id="EditClientGroupModule__client_group_id" name="client_group_id" style="width:300px;" onchange="Change_Select_ClientGroupModule();"></select>
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:14%;">模块列表</td>
+       <td id="EditClientGroupModule__tdModuleCheckboxList" style="width:82%;">
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditClientGroupModule();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   		<div class="red_font" style="float:left;">提示：官方模块均不支持分组下发，代理商自定义模块支持分组下发</div>
+   </form>
+</div>
+
+<div id="divEditAgentModuleDialog" class="easyui-dialog" title="新增客户端全局模块配置" data-options="iconCls:'icon-edit'" style="width:600px;height:500px;padding:10px;display:none;">
+	<form id="frmEditAgentModule" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+     <tr>
+       <td style="width:14%;">代理商</td>
+       <td style="width:82%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="EditAgentModule__module_id_list" name="module_id_list" value="" />
+          	<select id="EditAgentModule__AgentID" name="AgentID" style="width:300px;" onchange="Change_Agent_ModuleList();"></select>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:14%;">模块列表</td>
+       <td id="EditAgentModule__tdModuleCheckboxList" style="width:82%;">
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditAgentModule();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   		<div class="red_font" style="float:left;">提示：官方模块均不支持分组下发，代理商自定义模块支持分组下发</div>
+   </form>
+</div>
+
+
+<div id="divEditModuleParamDialog" class="easyui-dialog" title="修改模块参数" data-options="iconCls:'icon-edit'" style="width:400px;height:200px;padding:10px;display:none;">
+	<form id="frmEditModuleParam" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+     <tr>
+       <td style="width:25%;"><span id="spnParamTitle"></span></td>
+       <td style="width:60%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="EditModuleParam__agent_module_id" name="agent_module_id" value="" />
+       			<input type="text" id="EditModuleParam__icon_count" name="icon_count" value="" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:25%;"></td>
+       <td style="width:60%;">
+       	<span id="spnTips" style="display:none;">默认为0，表示加速器将随Steam启动；如需设置为不随Steam启动请设置此参数为1</span>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditModuleParam();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+</div>
+
+
+<div id="divEditExcludeRouteMacListDialog" class="easyui-dialog" title="修改下发排除路由器MAC列表" data-options="iconCls:'icon-edit'" style="width:800px;height:500px;padding:10px;display:none;">
+	<form id="frmEditExcludeRouteMacList" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+     <tr>
+       <td style="width:7%;">列表</td>
+       <td style="width:93%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="EditExcludeRouteMacList__agent_module_id" name="agent_module_id" value="" />
+       			<input type="hidden" id="EditExcludeRouteMacList__AgentID" name="" value="" />
+       			<textarea id="EditExcludeRouteMacList__exclude_route_mac_list" name="exclude_route_mac_list" value="" style="width:600px;height:55px;"></textarea>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:7%;">切换</td>
+       <td style="width:93%;" class="blue_font">
+       			<input id="ckbSwitch_DisplayNameMac" type="checkbox" onclick="Switch_DisplayNameMac();" checked />网吧名 / 路由器MAC
+       			<input id="ckbSelect_AllExcludeRouteMac" type="checkbox" style="margin-left:30px;" onclick="Select_AllExcludeRouteMac();" />全选
+			       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:7%;"></td>
+       <td style="width:93%;">
+       			<ul id="ulAllRouteMacSelectList" style="margin:0;padding:0;"></ul>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:7%;"></td>
+       <td style="width:93%;" class="blue_font">
+       			说明：左侧“网吧管理[Mac]”或左侧“客户端软件”中可根据路由器Mac自定义网吧名称
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditExcludeRouteMacList();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+</div>
+<div id="divEditExcludeOuterIpListDialog" class="easyui-dialog" title="修改下发排除外网IP列表" data-options="iconCls:'icon-edit'" style="width:800px;height:500px;padding:10px;display:none;">
+	<form id="frmEditExcludeOuterIpList" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+     <tr>
+       <td style="width:5%;">列表</td>
+       <td style="width:94%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="EditExcludeOuterIpList__agent_module_id" name="agent_module_id" value="" />
+       			<textarea id="EditExcludeOuterIpList__exclude_outer_ip_list" name="exclude_outer_ip_list" value="" style="width:600px;height:55px;"></textarea>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr style="">
+       <td style="width:7%;">切换</td>
+       <td style="width:93%;" class="blue_font">
+       			<input id="ckbSwitch_DisplayNameIp" type="checkbox" onclick="Switch_DisplayNameIp();" checked style="" />网吧名 / IP
+       			<input id="ckbSelect_AllExcludeOuterIp" type="checkbox" style="margin-left:30px;" onclick="Select_AllExcludeOuterIp();" style="" />全选
+			       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:5%;"></td>
+       <td style="width:94%;" class="blue_font">
+       			说明：左侧“网吧管理[IP]”者左侧“客户端管理”中可根据外网IP自定义网吧名称
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:5%;"></td>
+       <td style="width:94%;">
+       			<ul id="ulAllIpSelectList" style="margin:0;padding:0;"></ul>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditExcludeOuterIpList();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+﻿shared_rule_count=57
+copy_attempt=57
+copy_ok=56
+copy_fail=1
+my_rule_count=57
+export_dir=C:\Users\Administrator\Desktop\quguanggao\guize

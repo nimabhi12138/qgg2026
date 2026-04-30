@@ -1,0 +1,252 @@
+﻿﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content ="IE=edge,chrome=1" />
+
+	<!-- Le styles -->
+	<link href="/web/Public/css/style.css" rel="stylesheet">
+	<link href="/web/Public/Third/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements  html5shiv.js已去除 -->
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="/web/Public/images/logo_32.png">
+	<script type="text/javascript" src="/web/Public/js/jquery.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="/web/Public/js/Util.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+
+	
+	<title>广告猎手后台维护系统 - 客户端管理</title>
+	<script>
+		var g_strModuleParam = "";
+		var g_AgentID = "6877";
+		var g_AgentID_ToDisplay = "";
+		var g_LevelType = "0";
+		var g_ip = "";
+		var g_mac = "";
+	</script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/debug_rule_mng.html.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/client_mng.html.js"></script>
+	<script type="text/javascript" src="/web/Public/js/echarts.min.js"></script>
+</head>
+
+<body>
+ 	<div id="" class="easyui-panel" title="" style="width:99%;padding:10px;">
+   	<div style="width:100%;height:25px;padding:0px;">
+   		
+   		<ul class="nav nav-pills" style="float:left;">
+   			<!--
+			   <li class="active"><a href="#">近三天<span id="spnRecent3Day" class="badge">0</span></a></li>
+			   -->
+			   <li id="liRecent1Day"><a href="#">今天<span id="spnRecent1Day" class="badge"></span></a></li>
+			   <li id="liYesterday"><a href="#">昨天<span id="spnYesterday" class="badge"></span></a></li>
+			   <li id="liDayBeforeYesterday"><a href="#">前天<span id="spnDayBeforeYesterday" class="badge"></span></a></li>
+			   <li id="liRecent3Day"><a href="#">近三天<span id="spnRecent3Day" class="badge"></span></a></li>
+			   <li id="liRecent7Day"><a href="#">近一周<span id="spnRecent7Day" class="badge"></span></a></li>
+			   <li id="liRecent30Day"><a href="#">近一月<span id="spnRecent30Day" class="badge"></span></a></li>
+			   <li id="liInternetBarCount"><a href="#">网吧数<span id="spnInternetBarCount" class="badge"></span></a></li>
+			   <!--
+			   <li id="liFromToCount">
+			   	<a href="#">
+			   					从
+	               	<input type="text" id="begin_date" name="begin_date" class="easyui-datebox" style="width:100px;" />
+	               	到
+	          			<input type="text" id="end_date" name="end_date" class="easyui-datebox" style="width:100px;" />
+	        </a>
+	       </li>
+	       -->
+			</ul>
+			
+			<div id="divSearch" style="float:left;margin-left:30px;margin-top:6px;">
+				<ul style="margin:0;padding:0;">
+					<li style="width:80px;float:left;list-style:none;">
+						<select id="search_field" name="search_field" style="width:75px;margin-top:1px;height:25px;">
+														<option value="PublicIP">外网IP</option>
+							<option value="InternetBarName">网吧名</option>
+							<option value="LocalMac">MAC</option>
+							<option value="ClientVersion">版本</option>	
+						</select>
+					</li>
+					<input type="text" id="search_keyword" name="search_keyword" class="" style="margin-left:5px;width:160px;height:25px;" />
+	   			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="Search();" style="margin-left:10px;">查找</a>
+   			</ul>
+				<ul style="margin:0;padding:0;">
+					<li style="width:85px;float:left;list-style:none;">
+						附加搜索条件：
+					</li>
+					<select id="search_condition" name="search_condition" style="margin-left:0px;width:160px;height:25px;">
+						<option value="0">请选择</option>
+						<option value="not_online_15day">只显示15天未上线</option>
+						<option value="not_online_30day">只显示30天未上线</option>
+						</in>
+					</select>
+   			</ul>
+			</div>
+			
+			<a id="" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="DeleteBar_20Client5Day();" style="float:right;margin-right:10px;">删动态IP</a>
+   		<a id="" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="DeleteClient_3MonthNotOnline();" style="float:right;margin-right:10px;">删3月未上线</a>
+   		<a id="" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="DeleteClient();" style="float:right;margin-right:10px;">删客户端</a>
+						
+						
+			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-redo'" onclick="ShowRecentAgentClientCountChart(false);" style="float:right;margin-right:10px;">上线数曲线</a>			<span class="label label-warning" style="float:right;margin-right:30px;margin-top:9px;">提示: 点击表头可排序</span>
+   		<div style="clear:both;"></div>
+  	</div>
+  	<div id="divClientList" style="width:100%;overflow-y:scroll;">
+  		<input type="checkbox" id="ckbSelectAll" onclick="SelectAll_Client();" style="margin-left:0px;" />全选
+	    <table id="tblClientList" width="100%" class="table table-bordered table-condensed table-hover table-my-add">
+	      <thead>
+      		<tr>
+		        <th onclick="GetAll_OrderBy(2);">代理商<img id="spnOrderBy2" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(3);">外网IP<img id="spnOrderBy3" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(4);">本地MAC<img id="spnOrderBy4" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(14);">分组<img id="spnOrderBy3" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(12);">网吧名称<img id="spnOrderBy3" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(5);">计算机名<img id="spnOrderBy5" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(6);">首次登陆时间<img id="spnOrderBy6" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(7);">最后登陆时间<img id="spnOrderBy7" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(9);">操作系统<img id="spnOrderBy9" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onclick="GetAll_OrderBy(13);">版本<img id="spnOrderBy13" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <!--
+		        <th onclick="GetAll_OrderBy(11);">是否启用规则<img id="spnOrderBy11" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+								        -->
+		              		</tr>
+	      </thead>
+	      <tbody id="tbdClientList">
+	    	</tbody>
+	    </table>
+	 	</div>
+
+	  	<ul id="ulGetAllClientPager" class="pagination pager-my-add">
+			  <li class="disabled"><a>&laquo;</a></li>
+			  <li class="disabled"><a>&raquo;</a></li>
+			  <li>
+			  	<a style="padding:5px;">
+			  		<input type="text" style="width:30px;height:19px;" onkeyup="if(event.keyCode==13)GetAllClient($(this).val());"/>
+			  	</a>
+			  </li>
+			  <li><a>共0页0条数据 每页20条</a></li>
+			</ul>
+    </div>
+  </div>
+  
+  
+<div id="divEditIp_InternetBarNameDialog" class="" title="设置IP所在的网吧名称" data-options="iconCls:'icon-edit'" style="width:500px;height:200px;padding:10px;display:none;">
+	<form id="frmEditIp_InternetBarName" method="POST">
+   <table class="table table-striped" style="width:100%">
+     <tr>
+       <td style="width:25%;">网吧名称</td>
+       <td style="width:60%;">
+          	<input type="hidden" id="EditIp_InternetBarName__PublicIP" name="PublicIP" value="" style="width:300px;" />
+          	<input type="text" id="InternetBarName" name="InternetBarName" value="" style="width:300px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditIp_InternetBarName();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+</div>
+
+<div id="divShowClientLogDialog" class="" title="客户端日志" data-options="iconCls:'icon-detail'" style="width:800px;height:520px;padding:10px;display:none;">
+	<iframe id="ifmClientLog" scrolling="auto" frameborder="0" style="width:100%;height:98%;"></iframe>
+</div>
+
+<div id="divEditDebugRuleDialog" class="" title="新增调试规则" data-options="iconCls:'icon-debug'" style="width:1000px;height:520px;padding:10px;display:none;">
+	
+   		<a id="" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="DeleteDebugRule();" style="float:right;margin-right:10px;">删除调试规则</a>
+   		
+	<form id="frmEditDebugRule" method="POST">
+   <table class="table table-striped" style="width:100%">
+     <tr>
+       <td style="width:10%;">新增调试规则</td>
+       <td style="width:88%;">
+       			代理商：
+          	<input type="hidden" id="EditDebugRule__AgentID" name="AgentID" />
+          	<span id="spnEditDebugRule__AgentID" class="red_font" style="margin-right:30px;"></span>
+          	调试方法:
+		       	<input type="checkbox" id="debug_method_list__upload_log" name="fake__debug_method_list" value="upload_log" checked style="margin-left:10px;" />上传日志
+		       	<input type="checkbox" id="debug_method_list__upload_dump" name="fake__debug_method_list" value="upload_dump" checked style="margin-left:10px;" />上传DUMP
+		       	<p style="margin:0;">
+		       	客户端MAC列表：
+          	<input type="text" id="EditDebugRule_client_mac_list" name="client_mac_list" value="" style="width:350px;" />
+		       	上传服务器域名：
+          	<input type="text" id="EditDebugRule_upload_server_host" name="upload_server_host" value="" style="width:100px;" />
+          	</p>
+          	
+       			<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_EditDebugRule();">确定</a>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+   </table>
+   
+	    <table id="tblDebugRuleList" width="100%" class="table table-bordered table-condensed table-hover table-my-add">
+	      <thead>
+		        <th>代理商</th>
+		        <th>调试方法</th>
+		        <th>客户端MAC列表</th>
+		        <th>上传服务器域名</th>
+		        <th>备注</th>
+		        <th>加入时间</th>
+	      </thead>
+	      <tbody id="tbdDebugRuleList">
+	    	</tbody>
+	    </table>
+   
+   </form>
+</div>
+
+
+<div id="divGenerateStaticRuleDialog" class="" title="生成静态规则" data-options="iconCls:'icon-debug'" style="width:850px;height:520px;padding:10px;display:none;">
+	<form id="frmGenerateStaticRule" method="POST">
+   <table class="table table-striped" style="width:100%">
+     <tr>
+       <td style="width:10%;">客户端MAC</td>
+       <td style="width:88%;">
+       		<input id="GenerateStaticRule__client_mac" name="client_mac" style="width:700px;" />
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:10%;">规则JSON</td>
+       <td style="width:88%;">
+       		<textarea id="GenerateStaticRule__rule" name="rule" style="width:700px;height:200px;"></textarea>
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:10%;">静态规则</td>
+       <td style="width:88%;">
+       		<textarea id="GenerateStaticRule__static_rule" style="width:700px;height:200px;"></textarea>
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onclick="Submit_GenerateStaticRule();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   
+   </form>
+</div>
+
+<div id="divRecentAgentClientCountChartDialog" class="" title="近一月客户端上线数曲线" data-options="iconCls:'icon-edit'" style="width:1000px;height:500px;padding:10px;display:none;">
+ 	<div id="divRecentAgentClientCountChart" style="width:100%;height:440px;">
+ 	</div>
+</div>
+
+</body>
+</html>

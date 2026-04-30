@@ -1,0 +1,398 @@
+openapi: 3.0.3
+info:
+  title: QGG API
+  version: 1.0.0
+  description: 网吧去广告系统 API（管理端/用户端/客户端）
+servers:
+  - url: /api/v1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+        request_id:
+          type: string
+    RulePayload:
+      type: object
+      required: [name, enable_ad]
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 40
+        enable_ad:
+          type: integer
+          enum: [0, 1]
+        is_share:
+          type: integer
+          enum: [0, 1]
+        is_hide:
+          type: integer
+          enum: [0, 1]
+        remark:
+          type: string
+        pe_json:
+          type: string
+        dir_json:
+          type: string
+        md5_json:
+          type: string
+        reg_json:
+          type: string
+        md5_reg_json:
+          type: string
+        ip_json:
+          type: string
+        ctrl_wnd_json:
+          type: string
+        anti_thread_json:
+          type: string
+        thread_control_json:
+          type: string
+paths:
+  /dashboard:
+    get:
+      summary: 概览看板
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ok
+
+  /auth/login:
+    post:
+      summary: 登录
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+
+  /rules:
+    get:
+      summary: 规则列表
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ok
+    post:
+      summary: 新增规则
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RulePayload"
+      responses:
+        "200":
+          description: ok
+
+  /rules/{rule_id}:
+    put:
+      summary: 更新规则
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: rule_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RulePayload"
+      responses:
+        "200":
+          description: ok
+    delete:
+      summary: 删除规则
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: rule_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: ok
+
+  /rules/publish:
+    post:
+      summary: 发布规则
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [publish_type, target_scope, target_ids, rule_ids]
+              properties:
+                publish_type:
+                  type: string
+                  enum: [gray, full]
+                target_scope:
+                  type: string
+                  enum: [agent, group, device, all]
+                target_ids:
+                  type: array
+                  items:
+                    type: integer
+                rule_ids:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        "200":
+          description: ok
+
+  /groups/{group_id}/rules:
+    get:
+      summary: 列出分组绑定规则（client_group_rule）
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: ok
+    post:
+      summary: 绑定规则到分组
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [rule_id]
+              properties:
+                rule_id:
+                  type: integer
+                priority:
+                  type: integer
+                  default: 100
+                enabled:
+                  type: boolean
+                  default: true
+      responses:
+        "200":
+          description: ok
+  /groups/{group_id}/rules/{rule_id}:
+    delete:
+      summary: 解除分组与规则绑定
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: rule_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: ok
+
+  /groups:
+    get:
+      summary: 分组列表
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ok
+    post:
+      summary: 新建分组
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ok
+
+  /modules:
+    get:
+      summary: 模块列表
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ok
+    post:
+      summary: 新建模块
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ok
+
+  /publishes/{publish_id}/transition:
+    post:
+      summary: 发布状态迁移（draft→rolling_out/published；rolling_out→published）
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: publish_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [to_status]
+              properties:
+                to_status:
+                  type: string
+                  enum: [rolling_out, published]
+      responses:
+        "200":
+          description: ok
+        "400":
+          description: 非法迁移
+
+  /publishes:
+    get:
+      summary: 发布记录
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ok
+
+  /audits:
+    get:
+      summary: 操作审计
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ok
+
+  /clients:
+    get:
+      summary: 客户端列表
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ok
+
+  /client/rules/package:
+    get:
+      summary: 客户端拉取规则包（按发布/分组绑定/租户降级）
+      parameters:
+        - name: publish_version
+          in: query
+          schema:
+            type: string
+            default: v1
+          description: 兼容占位；若为 pb-* 则视为 publish_code
+        - name: device_uuid
+          in: query
+          schema:
+            type: string
+          description: 推荐传入，用于租户、分组与灰度匹配
+        - name: publish_code
+          in: query
+          schema:
+            type: string
+          description: 指定发布代号，需状态为 rolling_out/published 且命中目标范围
+      responses:
+        "200":
+          description: ok
+
+  /client/register:
+    post:
+      summary: 客户端注册
+      responses:
+        "200":
+          description: ok
+
+  /client/config:
+    get:
+      summary: 客户端拉取配置（与 rules/package 同源协商 publish_version / rule_hash）
+      parameters:
+        - name: device_uuid
+          in: query
+          schema:
+            type: string
+          description: 推荐
+        - name: device_id
+          in: query
+          schema:
+            type: string
+          description: 兼容；可为 UUID 或数字主键
+        - name: publish_code
+          in: query
+          schema:
+            type: string
+        - name: publish_version
+          in: query
+          schema:
+            type: string
+            default: v1
+      responses:
+        "200":
+          description: ok
+        "422":
+          description: device_uuid 与 device_id 均未提供
+
+  /client/heartbeat:
+    post:
+      summary: 客户端心跳
+      responses:
+        "200":
+          description: ok

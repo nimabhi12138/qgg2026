@@ -1,0 +1,57 @@
+﻿[
+    {
+        "module_id":  "",
+        "module_name":  "daidai",
+        "display":  "带带游戏陪玩[导航11]",
+        "dll":  "http://cdn.wb009.com/adhunter/daidai.zip",
+        "md5":  "85BAC8E5420B31803EAE4622B23EF921",
+        "visible":  "0",
+        "run_possibility":  "1000",
+        "run_time":  "",
+        "remark":  "易乐游带带陪玩，对应导航11的收益。"
+    },
+    {
+        "module_id":  "",
+        "module_name":  "Log_V",
+        "display":  "游戏弹窗[导航10]",
+        "dll":  "http://cdn.wb009.com/adhunter/Log_V.zip",
+        "md5":  "EF2C657093EBDB3D4E9EBD63BF059732",
+        "visible":  "0",
+        "run_possibility":  "1000",
+        "run_time":  "",
+        "remark":  "游戏弹窗，1元/UV/PC，对应导航10收益"
+    },
+    {
+        "module_id":  "",
+        "module_name":  "Nav5",
+        "display":  "游戏租号[导航5]",
+        "dll":  "http://cdn.wb009.com/adhunter/Nav5.zip",
+        "md5":  "EC8361DDF5E665BDA3184B53D6108C77",
+        "visible":  "0",
+        "run_possibility":  "1000",
+        "run_time":  "",
+        "remark":  "对应\"收益明细”里导航5的收益数据。"
+    },
+    {
+        "module_id":  "",
+        "module_name":  "Nav2",
+        "display":  "网吧加速器",
+        "dll":  "http://cdn.wb009.com/adhunter/Nav2.zip",
+        "md5":  "C9457C49D8061D1EAF454A7EF7496C4A",
+        "visible":  "0",
+        "run_possibility":  "1000",
+        "run_time":  "",
+        "remark":  "加速器合集，收益更高，包含雷神，迅游，火箭，野豹，对应导航2收益"
+    },
+    {
+        "module_id":  "",
+        "module_name":  "Nav3",
+        "display":  "网吧租号",
+        "dll":  "http://cdn.wb009.com/adhunter/Nav3.zip",
+        "md5":  "AFBFB78A82FA51AD27C5082C4CA7A0A6",
+        "visible":  "0",
+        "run_possibility":  "1000",
+        "run_time":  "",
+        "remark":  "网吧租号集合，这个和游戏租号[导航5]只能二选一。"
+    }
+]

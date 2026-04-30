@@ -1,0 +1,344 @@
+﻿[
+    {
+        "rule_id":  "201172",
+        "bResult":  false,
+        "szMsg_raw":  "e682a8e79a84e8a784e58899e5ba93e4b8ade5b7b2e5ad98e59ca8e5908ce5908de8a784e58899",
+        "szMsg":  "您的规则库中已存在同名规则"
+    },
+    {
+        "rule_id":  "201112",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "198205",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "185528",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "183732",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "183216",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "182819",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "182538",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "177461",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "144320",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "141456",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "140879",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "101553",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "84515",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "74490",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "68348",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "66408",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "57330",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "52890",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "48445",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "46957",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "46819",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "41398",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "34581",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "28886",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "26633",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "18861",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "14898",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "11771",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "10293",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "7435",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "7417",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "7360",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "4559",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "4509",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "3938",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "3914",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "3827",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "3817",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "3738",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "3710",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "3396",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "2833",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "2684",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "2682",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "2581",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "2405",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "2037",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "1616",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "1470",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "308",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "127",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "74",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "57",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "56",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "55",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    },
+    {
+        "rule_id":  "37",
+        "bResult":  true,
+        "szMsg_raw":  "e5a48de588b6e8a784e58899e5a4b1e8b4a5",
+        "szMsg":  "复制规则失败"
+    }
+]

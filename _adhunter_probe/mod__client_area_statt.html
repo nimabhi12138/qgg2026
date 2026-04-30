@@ -1,0 +1,118 @@
+﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content ="IE=edge,chrome=1" />
+
+	<!-- Le styles -->
+	<link href="/web/Public/css/style.css" rel="stylesheet">
+	<link href="/web/Public/Third/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements  html5shiv.js已去除 -->
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="/web/Public/images/logo_32.png">
+	<script type="text/javascript" src="/web/Public/js/jquery.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="/web/Public/js/Util.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+
+	
+	<title>广告猎手后台维护系统 - 代理商地区统计</title>
+	<script>
+		var g_strModuleParam = "";
+		var g_AgentID = "6877";
+		var g_AgentID_ToDisplay = "";
+	</script>
+	<script type="text/javascript" src="/web/Public/js/echarts.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/client_area_statt.html.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+</head>
+
+<body>
+	
+	   	<div id="divButtonTab" style="float:left;margin-top:3px;">
+	   			<button id="" type="button" class="btn btn-danger btn-xs" onclick="DisplayStatus(0);" style="margin-left:20px;float:left;width:100px;">
+	   				所有
+	   			</button>
+	   			<button id="" type="button" class="btn btn-success btn-xs" onclick="DisplayStatus(1);" style="margin-left:20px;float:left;width:100px;">
+	   				今日
+	   			</button>
+	   			<button id="" type="button" class="btn btn-success btn-xs" onclick="DisplayStatus(2);" style="margin-left:20px;float:left;width:100px;">
+	   				近30天
+	   			</button>
+	   	</div>
+  	<div id="divClientAreaStattChart" style="width:600px;height:350px;margin:auto;">
+  	</div>
+  	<div style="border-color:#ccc;border-width:1px 0 0 0;border-style:solid;">
+	  	<div id="divCityStattChart_1" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_2" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_3" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_4" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_5" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_6" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_7" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_8" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_9" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_10" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_11" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_12" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_13" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_14" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_15" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_16" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_17" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_18" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_19" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_20" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_21" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_22" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_23" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_24" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_25" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_26" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_27" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_28" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_29" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_30" style="float:left;width:400px;height:300px;">
+	  	</div>
+	  	<div id="divCityStattChart_31" style="float:left;width:400px;height:300px;">
+	  	</div>
+   		<div style="clear:both;"></div>
+  	</div>
+
+</body>
+</html>

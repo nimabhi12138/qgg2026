@@ -1,0 +1,136 @@
+﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content ="IE=edge,chrome=1" />
+
+	<!-- Le styles -->
+	<link href="/web/Public/css/style.css" rel="stylesheet">
+	<link href="/web/Public/Third/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements  html5shiv.js已去除 -->
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="/web/Public/images/logo_32.png">
+	<script type="text/javascript" src="/web/Public/js/jquery.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/web/Public/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/web/Public/js/jquery-easyui/themes/icon.css">
+	<script type="text/javascript" src="/web/Public/js/Util.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+
+	
+	<title>广告猎手后台维护系统</title>
+	<script>
+		var g_strModuleParam = "";
+		var g_AgentID = "6877";
+		var g_ParentAgentID = "0";
+		var g_AgentID_ToDisplay = "";
+		var g_IsPop = "0";
+	</script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/yjs_agent_process_mng.html.js"></script>
+	<script type="text/javascript" src="/web/Public/js/tpljs/common__.html.js"></script>
+</head>
+
+<body>
+ 	<div id="" class="easyui-panel" title="" style="width:100%;padding:10px;">
+   	<div style="width:100%;height:25px;padding:0px;">
+   		
+   		<!--
+   		<div style="float:left;margin-bottom:10px;">
+				<div style="float:left;line-height:23px;margin-left:0px;">功能开关：<input id="FunctionApplySwitch" class="easyui-switchbutton" data-options="onText:'开',offText:'关'" /></div>
+				<div id="divEnabledMsg" class="green_font" style="float:left;line-height:23px;margin-left:25px;margin-right:10px;">广告/增值检测运行中</div>
+				<div id="divEnabledAnimated" style="float:left;line-height:23px;"><img src="/web/Public/images/running.gif" /></div>
+				<div style="clear:both;"></div>
+			</div>   		-->
+   		
+			<div id="divSearch" style="float:left;margin-left:20px;margin-top:0px;margin-top:0px;">
+				<ul style="margin:0;padding:0;">
+					选择日期：<input type="text" id="log_date" name="log_date" class="easyui-datebox" style="width:100px;" />
+	   			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onClick="GetAllYjsUploadProcess(1);" style="margin-left:10px;">查找</a>
+	   			
+	   			<div style="clear:both;"></div>
+   			</ul>
+			</div>
+   		
+		   		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onClick="Delete3DayBefore();" style="float:right;margin-right:17px;">删3天前记录</a>
+		   		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onClick="Delete7DayBefore();" style="float:right;margin-right:10px;">删7天前记录</a>
+	   			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onClick="DeleteYjsUploadProcess();" style="float:right;margin-right:10px;">删除该日数据</a>
+   		<div style="clear:both;"></div>
+  	</div>
+  	<div id="divYjsUploadProcessList" style="width:100%;overflow-y:scroll;">
+	    <table id="tblYjsUploadProcessList" width="100%" class="table table-bordered table-hover" style="word-break:break-all;">
+	      <thead>
+      		<tr>
+		        <th onClick="GetAll_OrderBy(3);">IP<img id="spnOrderBy3" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onClick="GetAll_OrderBy(4);">计算机名<img id="spnOrderBy4" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onClick="GetAll_OrderBy(5);">MAC<img id="spnOrderBy5" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onClick="GetAll_OrderBy(6);" style="width:30%;">进程路径<img id="spnOrderBy6" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onClick="GetAll_OrderBy(11);">CPU/GPU<img id="spnOrderBy11" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onClick="GetAll_OrderBy(12);">显存<img id="spnOrderBy12" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onClick="GetAll_OrderBy(7);">文件MD5<img id="spnOrderBy7" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onClick="GetAll_OrderBy(8);">类型<img id="spnOrderBy8" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+		        <th onClick="GetAll_OrderBy(10);">时间<img id="spnOrderBy10" class="sort-esc-img" src="/web/Public/images/up_down_white.png"/></th>
+      		</tr>
+	      </thead>
+	      <tbody id="tbdYjsUploadProcessList">
+	    </tbody>
+	    </table>
+  	</div>
+	    
+	  	<ul id="ulGetAllYjsUploadProcessPager" class="pagination pager-my-add">
+			  <li class="disabled"><a>&laquo;</a></li>
+			  <li class="disabled"><a>&raquo;</a></li>
+			  <li>
+			  	<a style="padding:5px;">
+			  		<input type="text" style="width:30px;height:19px;" onKeyUp="if(event.keyCode==13)GetAllYjsUploadProcess($(this).val());"/>
+			  	</a>
+			  </li>
+			  <li><a>共0页0条数据 每页20条</a></li>
+			</ul>
+    </div>
+  </div>
+  
+  
+<div id="divEditYjsUploadProcessDialog" class="easyui-dialog" title="新增网吧分组" data-options="iconCls:'icon-edit'" style="width:600px;height:250px;padding:10px;display:none;">
+	<form id="frmEditYjsUploadProcess" method="POST">
+   <table class="table table-striped table-condensed" style="width:100%">
+     <tr>
+       <td style="width:25%;">代理商</td>
+       <td style="width:60%;">
+       			<!--ID字段特殊处理，input元素的ID和NAME属性不一样-->
+       			<input type="hidden" id="EditYjsUploadProcess__Id" name="Id" value="" />
+          	<select id="EditYjsUploadProcess__AgentID" name="AgentID" style="width:300px;">
+          	</select>
+       </td>
+       <td class="red_font">*</td>
+     </tr>
+     <tr>
+       <td style="width:25%;">网吧分组名</td>
+       <td style="width:60%;">
+          	<input type="text" id="EditYjsUploadProcess__process_group_name" name="client_group_name" value="" style="width:300px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:25%;">备注</td>
+       <td style="width:60%;">
+          	<input type="text" id="EditYjsUploadProcess__remark" name="remark" value="" style="width:300px;" />
+       </td>
+       <td class="red_font"></td>
+     </tr>
+     <tr>
+       <td style="width:10em">&nbsp;</td>
+       <td>
+       	<a id="" href="#" class="easyui-linkbutton" icon="icon-ok" onClick="Submit_EditYjsUploadProcess();">确定</a>
+       </td>
+       <td>&nbsp;</td>
+     </tr>
+   </table>
+   </form>
+ </div>
+
+</body>
+</html>

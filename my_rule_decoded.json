@@ -1,0 +1,71 @@
+﻿{
+    "Id":  "370083",
+    "AgentID":  "6877",
+    "OrgnShareAgentID":  "5",
+    "AdName":  "QQ防盗号",
+    "EnableAd":  "1",
+    "PE":  "",
+    "DIR":  "{\"*.*\":{\"\\\\WeGam*\\\\msimg32.dll\":[\"noCreate\"],\"\\\\TGP*顺网专版\\\\msimg32.dll\":[\"noCreate\"]},\"*\":{\"\\\\WeGam*\\\\msimg32.dll\":[\"noCreate\"],\"\\\\TGP*顺网专版\\\\msimg32.dll\":[\"noCreate\"]}}",
+    "MD5":  "",
+    "REG":  "",
+    "MD5_REG":  "",
+    "IP":  "[{\"*.*\":{\"out\":[{\"127.0.0.1\":{\"level\":1,\"tcp\":[\"4301\",\"4302\",\"4303\",\"4304\",\"4305\",\"4306\",\"4307\"]}}]}}]",
+    "IsShare":  "0",
+    "Remark":  "猎手版本需要2.7.12.1020或更高，低于该版本请不要使用该规则",
+    "RuleUsedCount":  "0",
+    "CtrlWnd":  "",
+    "AntiThread":  "",
+    "Process":  "",
+    "ThreadControl":  "",
+    "is_hide":  "0",
+    "LastModify":  "2024-04-28 15:48:25",
+    "bk_from_adrule_id":  "",
+    "bk_desc":  "",
+    "run_possibility":  "100",
+    "AgentName":  "17629075264",
+    "bk_id_list":  "",
+    "bk_desc_list":  "",
+    "DIR_Parsed":  {
+                       "*.*":  {
+                                   "\\WeGam*\\msimg32.dll":  [
+                                                                 "noCreate"
+                                                             ],
+                                   "\\TGP*顺网专版\\msimg32.dll":  [
+                                                                   "noCreate"
+                                                               ]
+                               },
+                       "*":  {
+                                 "\\WeGam*\\msimg32.dll":  [
+                                                               "noCreate"
+                                                           ],
+                                 "\\TGP*顺网专版\\msimg32.dll":  [
+                                                                 "noCreate"
+                                                             ]
+                             }
+                   },
+    "IP_Parsed":  {
+                      "value":  [
+                                    {
+                                        "*.*":  {
+                                                    "out":  [
+                                                                {
+                                                                    "127.0.0.1":  {
+                                                                                      "level":  1,
+                                                                                      "tcp":  [
+                                                                                                  "4301",
+                                                                                                  "4302",
+                                                                                                  "4303",
+                                                                                                  "4304",
+                                                                                                  "4305",
+                                                                                                  "4306",
+                                                                                                  "4307"
+                                                                                              ]
+                                                                                  }
+                                                                }
+                                                            ]
+                                                }
+                                    }
+                                ],
+                      "Count":  1
+                  }
+}

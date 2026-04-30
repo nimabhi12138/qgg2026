@@ -1,0 +1,240 @@
+一、它本质上是什么
+它不是“网页配几条规则”的小工具，而是一套完整的网吧终端控制产品，核心结构是：
+
+云端后台管理规则、分组、客户端和专项模块
+客户端开机尽早启动
+客户端联网拉配置/模块
+本地执行层负责进程、窗口、网络、文件、注册表这几类控制
+针对特定网吧环境，还会下发专项修复包
+这和你一开始判断的一样，目标就是无盘网吧里“每次开机重置，但客户端一启动就重新拉规则并生效”。
+
+二、网站和后台我已经确认到的东西
+公开站点能确认它是老的 PHP + IIS 后台，前端比较传统。后台菜单和前端源码里，已经暴露出它的产品模型：
+
+我的规则
+共享规则库
+分组规则管理
+客户端管理
+网吧管理[IP/Mac]
+模块分配
+客户端下载
+客户端下载不是固定公开包，而是后台生成“专属客户端”。链路上能看到：
+
+agent_mng/generate_client
+agent_mng/check_generate_client_progress
+说明它是“账号维度生成客户端”而不是一个统一安装包。
+
+三、规则模型我已经摸到的大框架
+网站前端和客户端字符串里，都能看到同一套规则字段，至少包括：
+
+DIR
+REG
+IP
+CtrlWnd
+AntiThread
+MD5_REG
+BootBat
+这已经足够说明它的规则中心不是单一黑名单，而是多类规则混合：
+
+文件/目录规则
+注册表规则
+网络规则
+窗口控制规则
+线程/注入相关规则
+哈希匹配规则
+启动批处理规则
+也就是说，你后面做产品，规则中心至少要支持“多分类规则 + 分组下发 + 客户端本地解释执行”。
+
+四、客户端下载包里有什么
+我用你账号下载到的专属 ZIP 里有 3 个文件：
+
+AdHunter.exe
+猎手简易安装工具.exe
+猎手安装说明.txt
+关键信息：
+
+AdHunter.exe
+未签名
+x64
+版本 2.12.10.1008
+有明显壳特征，像 VMProtect
+猎手简易安装工具.exe
+未签名
+x64
+更像“网吧环境部署工具”，不是普通安装器
+静态字符串已经直接暴露出客户端接口关键词：
+
+client_get_data/get_agent_module
+get_client_outer_ip
+get_client_param
+get_debug_rule
+client_download/download
+这说明客户端启动后会做：
+
+获取自身公网/环境信息
+获取客户端参数
+获取模块
+获取调试规则
+下载内容
+五、客户端启动后真实做了什么
+这是最关键的部分。我在 Hyper-V 虚机里跑了它，并做了启动跟踪。
+
+1. 进程会随机改名
+原始文件还是：
+
+C:\Analysis\adhunter\17629075264\17629075264\AdHunter.exe
+但运行后进程名会变成随机名，比如：
+
+puxgwllk.exe
+fuhmceou.exe
+lfyrekut.exe
+evczcuka.exe
+说明它会混淆运行时进程标识。
+
+2. 启动就安装随机名驱动
+我抓到过多个随机驱动服务名，比如：
+
+l9qtsnk
+viebqhu9c
+jr90nzj
+路径类似：
+
+C:\Windows\jueikzd56\l9qtsnk.sys
+C:\Windows\q7jbn5p1d\viebqhu9c.sys
+C:\Windows\npgz9\jr90nzj.sys
+但文件本体一致指向：
+
+原始文件名：AdDriver.sys
+产品名：振创网络净化中心
+公司名：浙江振创网络科技有限公司
+这说明它的本地执行核心里，确实有驱动层。
+
+3. 会解包一整套窗口控制/注入模块
+启动后它会在 C:\Windows\<随机目录>\Module\ControlWindow\ 下放一套模块，实际抓到过：
+
+ControlWindow.dll
+cwapi_32.dll
+hkthunk.dll
+hkthunk64.dll
+remote.exe
+GLLA.exe
+而且主进程会真实加载：
+
+ControlWindow.dll
+这个名字和结构已经很直白了，它不是单纯“配置读取器”，而是一个窗口控制/注入执行层。
+
+4. 目录存在明显隐藏/反枚举行为
+我抓到一个很特别的现象：
+
+cmd dir 能看到目录
+Test-Path / Get-Item 却会说路径不存在
+但这个目录里的具体文件又能直接访问
+这说明它对目录层面做了明显的隐藏或过滤处理。
+
+六、它启动后联网拉了什么
+这部分也拿到了实证。
+
+启动后几秒内，当前用户缓存目录里会出现：
+
+WxPlugin[1].zip
+路径是：
+
+C:\Users\Administrator\AppData\Local\Microsoft\Windows\INetCache\IE\843135PW\WxPlugin[1].zip
+创建时间我抓到的是：
+
+2026-04-23 15:30:11
+而主程序启动时间是：
+
+2026-04-23 15:30:07
+也就是说，启动后 4 秒左右它就已经下发了专项包。
+
+这个 ZIP 里只有一个脚本：
+
+WxPlugin.bat
+内容很关键，它会检查这些网吧/计费环境标识：
+
+iCafe8
+EYOOCLIENTSTATUS
+superadmin
+NXD
+nds
+然后执行这些动作：
+
+net stop wxpluginad
+删除 wxpluginad.sys
+删除 C:\windows\syswow64\drivers\*.dat
+处理 C:\windows\syswow64\Wxplugin.sys
+给 P2PSyncService.exe 加 IFEO
+这已经证明两件事：
+
+它确实会“云端下发专项包”
+下发内容不是抽象规则，而可以是面向特定网吧环境的批处理修复包
+七、日志里证实了本地执行层有哪些模块
+它会持续写：
+
+AdhDriverLog.txt
+这个日志不是纯文本，是十六进制编码；我解码后看到这些明确记录：
+
+LogModule Loaded Success!
+ProcessModule Load Success!
+RegistryModule Load Success!
+NetworkModule Loaded Success!
+FileModule Load Success!
+LMP_Init Load Success!
+Driver Initialize Complete! Status: 0
+这基本已经把它的本地执行模块说透了：
+
+进程模块
+注册表模块
+网络模块
+文件模块
+日志模块
+驱动初始化
+也就是说，广告猎手的“去广告”不是单点实现，而是一个本地多模块规则执行器。
+
+八、和云端通讯有关的域名/线索
+我抓到过这些明确的字符串或解析目标：
+
+程序字符串里：
+
+http://1.adhunter.cn/index.php/client_get_data/get_ip_agent_name
+http://2.adhunter.cn/index.php/client_get_data/get_ip_agent_name
+http://3.adhunter.cn/index.php/client_get_data/get_ip_agent_name
+http://z.wb009.com/nav2/%s/remote.txt
+运行时 DNS 里看到过：
+
+cdn.hunter66.com
+3.ywcywl.com
+这说明它至少不是单一主站通信，而是：
+
+主控制域
+模块/导航域
+CDN/下载域
+分层很明显。
+
+九、我目前已经能下的结论
+如果把现在所有证据拼起来，广告猎手的执行链大概率是这样：
+
+开机通过启动链尽早运行
+主程序启动并随机化进程名
+安装随机名驱动服务
+解包本地窗口控制模块
+初始化进程/文件/注册表/网络执行层
+联网获取环境参数
+拉取专项模块或规则包
+本地执行规则与专项清理动作
+持续写本地日志并保持常驻
+所以它的产品形态，不是“云端规则 + 一个普通客户端”这么简单，而是：
+
+云端规则中心
+云端专项模块投放
+本地驱动层
+本地窗口控制/注入层
+本地日志与缓存
+网吧环境识别逻辑
+十、我还没拿到、但已经知道缺口在哪
+目前还没完全打透的点主要有 3 个：
+
+规则包的真实下载 URL 和格式，还没完整钉死
+cw.dat 这类本地二进制状态/规则缓存，还没完全解码
+广告猎手自己的共享规则库内容，我没有也不会帮你直接导出或复用
